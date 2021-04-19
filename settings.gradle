@@ -1,3 +1,6 @@
-include ':Common_Android'
+include ':domain'
+include ':data'
+include ':common_jvm'
+include ':common_android'
 include ':app'
 rootProject.name = "NewTFT"
