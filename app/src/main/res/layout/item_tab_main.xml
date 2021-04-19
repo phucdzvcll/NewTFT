@@ -24,7 +24,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="@dimen/dp_2"
         android:gravity="center_horizontal|top"
-        android:textColor="@color/selector_tab_search_result"
+        android:textColor="@drawable/selector_tab_search_result"
         android:textSize="9sp"
         android:maxLines="1"
         android:ellipsize="end"

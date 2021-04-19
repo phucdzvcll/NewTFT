@@ -1,8 +1,6 @@
-package com.toast.comico.vn.common_android
+package com.free.common_android
 
-import android.app.Activity
 import android.content.res.Resources
-import android.view.View
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -63,8 +61,4 @@ val Int.dpToPx: Int
 val Double.dpToPx: Int
     get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
-
-fun Activity.hideKeyboard(view: View) {
-    view.hideKeyboard(this)
-}
 

@@ -1,4 +1,4 @@
-package com.free.saleapp.di
+package com.free.newtft.di
 
 import android.app.Application
 import com.free.common_android.di.createCommonModule
