@@ -1,21 +1,30 @@
-package com.free.newtft.main.view
+package com.free.newtft.features.show_champ
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import com.free.common_android.BaseFragment
 import com.free.newtft.databinding.FragmentShowBinding
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class ShowFragment : BaseFragment() {
+    private lateinit var fragmentShowBinding: FragmentShowBinding
+    private val showChampsViewModel: ShowChampsViewModel by viewModel()
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentShowBinding.inflate(inflater, container, false).root
+        fragmentShowBinding = FragmentShowBinding.inflate(inflater, container, false)
+        fragmentShowBinding.champ = showChampsViewModel
+        fragmentShowBinding.lifecycleOwner = viewLifecycleOwner
+        return fragmentShowBinding.root
     }
+
+
 
     companion object {
         const val screenName: String = "show"

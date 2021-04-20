@@ -4,6 +4,7 @@
     <bytecodeTargetLevel target="1.7">
       <module name="NewTFT.app" target="1.8" />
       <module name="NewTFT.common_android" target="1.8" />
+      <module name="NewTFT.data" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

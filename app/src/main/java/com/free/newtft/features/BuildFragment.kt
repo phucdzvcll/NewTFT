@@ -1,4 +1,4 @@
-package com.free.newtft.main.view
+package com.free.newtft.features
 
 import android.os.Bundle
 import android.view.LayoutInflater

@@ -1,27 +1,27 @@
-package com.free.newtft.main.view
+package com.free.newtft.features
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.free.common_android.BaseFragment
-import com.free.newtft.databinding.FragmentLoginBinding
+import com.free.newtft.databinding.FragmentRecommendBinding
 
 
-class LoginFragment : BaseFragment() {
+class RecommendFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentLoginBinding.inflate(inflater, container, false).root
+        return FragmentRecommendBinding.inflate(inflater, container, false).root
     }
 
     companion object {
-        const val screenName: String = "login"
-        fun newInstant(): LoginFragment {
-            return LoginFragment()
+        const val screenName: String = "recommend"
+        fun newInstant(): RecommendFragment {
+            return RecommendFragment()
         }
     }
 }
