@@ -7,6 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.free.common_jvm.extension.defaultZero
 import com.free.domain.entities.ChampsListEntity
+import com.free.newtft.R
 import com.free.newtft.databinding.ItemChampBinding
 
 class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHolder>() {
@@ -17,6 +18,13 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
         RecyclerView.ViewHolder(binding.root) {
         fun bind(champ: Champ) {
             binding.champ = champ
+            when (champ.cost) {
+                1 -> binding.imgChamp.setBackgroundResource(R.drawable.border_gray)
+                2 -> binding.imgChamp.setBackgroundResource(R.drawable.border_green)
+                3 -> binding.imgChamp.setBackgroundResource(R.drawable.border_blue)
+                4 -> binding.imgChamp.setBackgroundResource(R.drawable.border_pink)
+                5 -> binding.imgChamp.setBackgroundResource(R.drawable.border_gold)
+            }
         }
     }
 
@@ -39,22 +47,34 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
 
 
     fun setupData(champsListEntity: ChampsListEntity) {
+        val url = "https://rerollcdn.com/characters/Skin/4.5/"
         listChamps.clear()
         champsListEntity.listChamps.forEach { champ ->
             listChamps.add(
                 Champ(
                     id = champ.id,
                     cost = champ.cost,
-                    imgUrl = champ.imgUrl,
-                    name = champ.name
+                    name = champ.name,
+                    imgUrl = url + reName(champ.name) + ".png"
                 )
             )
         }
+        listChamps.sortBy { it.cost }
         notifyDataSetChanged()
     }
 
+    private fun reName(name: String): String {
+        return if (name == "Cho'Gath") {
+            "Chogath"
+        } else if (name == "Nunu & Willump") {
+            "Nunu"
+        } else {
+            name.replace(" ", "")
+        }
+    }
+
     data class Champ(
-        val id: Int,
+        val id: String,
         val name: String,
         val cost: Int,
         val imgUrl: String

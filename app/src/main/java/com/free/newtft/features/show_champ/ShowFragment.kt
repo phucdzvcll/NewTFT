@@ -37,7 +37,7 @@ class ShowFragment : BaseFragment() {
         ) {
             val adapterShowChamps = AdapterShowChamps()
             adapterShowChamps.setupData(champsListEntity)
-            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 4)
+            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 5)
             recyclerView.adapter = adapterShowChamps
         }
     }

@@ -41,9 +41,8 @@ class ShowChampsViewModel(
     private fun createChampsListEntityModel(): ChampsListEntity{
         return ChampsListEntity(listOf(
             ChampsListEntity.Champ(
-                id = 0,
+                id = "",
                 cost = 0,
-                imgUrl = "",
                 name = ""
             )
         ))
