@@ -8,10 +8,10 @@
             type="com.free.newtft.features.show_champ.ShowChampsViewModel" />
     </data>
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/imgView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        imgUrl="@{showChampsViewModel.champsListChampsLiveData.listChamps[0].imgUrl}"/>
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rcvChamp"
+        data="@{showChampsViewModel.champsListChampsLiveData}"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 
 </layout>

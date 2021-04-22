@@ -4,7 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.free.common_android.BaseFragment
+import com.free.domain.entities.ChampsListEntity
 import com.free.newtft.databinding.FragmentShowBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -22,6 +26,20 @@ class ShowFragment : BaseFragment() {
         fragmentShowBinding.showChampsViewModel = showChampsViewModel
         fragmentShowBinding.lifecycleOwner = viewLifecycleOwner
         return fragmentShowBinding.root
+    }
+
+    object Biding {
+        @BindingAdapter("data")
+        @JvmStatic
+        fun loadData(
+            recyclerView: RecyclerView,
+            champsListEntity: ChampsListEntity
+        ) {
+            val adapterShowChamps = AdapterShowChamps()
+            adapterShowChamps.setupData(champsListEntity)
+            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 4)
+            recyclerView.adapter = adapterShowChamps
+        }
     }
 
     companion object {

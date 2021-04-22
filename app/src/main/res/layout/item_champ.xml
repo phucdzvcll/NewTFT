@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout>
+
+    <data>
+
+        <variable
+            name="champ"
+            type="com.free.newtft.features.show_champ.AdapterShowChamps.Champ" />
+    </data>
+
+    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/dp_5">
+
+        <ImageView
+            android:id="@+id/imgChamp"
+            imgUrl="@{champ.imgUrl}"
+            android:contentDescription="@string/no_image"
+            android:layout_width="@dimen/dp_80"
+            android:layout_height="@dimen/dp_80" />
+    </FrameLayout>
+</layout>
+
