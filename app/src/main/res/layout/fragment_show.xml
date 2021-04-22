@@ -1,18 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
 
     <data>
+
         <variable
-            name="champ"
+            name="showChampsViewModel"
             type="com.free.newtft.features.show_champ.ShowChampsViewModel" />
     </data>
 
-    <TextView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/show_all_rcv"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:textColor="@color/black"
-        android:text="@{champ.listChampsLiveData.listChamps[0].name}">
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/imgView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        imgUrl="@{showChampsViewModel.champsListChampsLiveData.listChamps[0].imgUrl}"/>
 
-    </TextView>
 </layout>
