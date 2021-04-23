@@ -1,26 +1,27 @@
-package com.free.newtft.main.view
+package com.free.newtft.features
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.free.common_android.BaseFragment
-import com.free.newtft.databinding.FragmentShowBinding
+import com.free.newtft.databinding.FragmentBuildBinding
 
-class ShowFragment : BaseFragment() {
+
+class BuildFragment : BaseFragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return FragmentShowBinding.inflate(inflater, container, false).root
+        return FragmentBuildBinding.inflate(inflater, container, false).root
     }
 
     companion object {
-        const val screenName: String = "show"
-        fun newInstant(): ShowFragment {
-            return ShowFragment()
+        const val screenName: String = "build"
+        fun newInstant(): BuildFragment {
+            return BuildFragment()
         }
     }
 }
