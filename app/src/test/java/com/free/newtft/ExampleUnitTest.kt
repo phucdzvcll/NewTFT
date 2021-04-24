@@ -12,6 +12,22 @@ import org.junit.Assert.*
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
-        assertEquals(4, 2 + 2)
+        val words = "a a a a a a b b b b b c c d d o e e e".split(' ')
+        val frequenciesByFirstChar = words.distinct()
+//            .groupingBy { it }
+//            .eachCount()
+//        val list = mutableListOf<Tessst>()
+//        frequenciesByFirstChar.forEach {
+//            list.add(Tessst(
+//                name = it.key,
+//                amount = it.value
+//            ))
+//        }
+        println(frequenciesByFirstChar)
+
     }
+//    data class Tessst(
+//        val name: String,
+//        val amount: Int
+//    )
 }
