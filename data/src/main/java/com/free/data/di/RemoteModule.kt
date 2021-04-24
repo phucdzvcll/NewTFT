@@ -1,13 +1,15 @@
 package com.free.data.di
 
+import com.free.data.RecommendTeamsApiService
 import com.free.data.ShowChampApiService
 import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.ChampsListMapper
+import com.free.data.map.TeamRecommendListMapper
 import com.free.data.repository.ChampsRepositoryImpl
+import com.free.data.repository.TeamsRecommendResponseImpl
 import com.free.domain.repositories.ChampsRepository
-import okhttp3.Interceptor
+import com.free.domain.repositories.TeamsRecommendRepository
 import okhttp3.OkHttpClient
-import okhttp3.logging.HttpLoggingInterceptor
 import org.koin.dsl.module
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
@@ -16,15 +18,8 @@ import java.util.concurrent.TimeUnit
 val createRemoteModule = module {
     single { RemoteExceptionInterceptor() }
 
-    factory<Interceptor> {
-        HttpLoggingInterceptor().apply {
-            level = HttpLoggingInterceptor.Level.BODY
-        }
-    }
-
     factory {
         OkHttpClient.Builder()
-            .addInterceptor(get<Interceptor>())
             .connectTimeout(30, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
@@ -40,14 +35,23 @@ val createRemoteModule = module {
     }
 
     factory { get<Retrofit>().create(ShowChampApiService::class.java) }
+    factory { get<Retrofit>().create(RecommendTeamsApiService::class.java) }
 
     factory { ChampsListMapper() }
-
+    factory { TeamRecommendListMapper() }
     single<ChampsRepository> {
         ChampsRepositoryImpl(
             remoteExceptionInterceptor = get(),
             champsListMapper = get(),
             showChampApiService = get()
+        )
+    }
+
+    single<TeamsRecommendRepository> {
+        TeamsRecommendResponseImpl(
+            remoteExceptionInterceptor = get(),
+            recommendTeamsApiService = get(),
+            teamsRecommendListMapper = get()
         )
     }
 }

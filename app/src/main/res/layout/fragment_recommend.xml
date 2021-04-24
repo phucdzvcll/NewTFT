@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
 
-    <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <data>
+
+        <variable
+            name="teamsRecommendViewModel"
+            type="com.free.newtft.features.recommend_teams.TeamsRecommendViewModel" />
+    </data>
+
+    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
+        loadData="@{teamsRecommendViewModel.teamsRecommendListEntity}"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <androidx.appcompat.widget.AppCompatTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"
-            android:text="hello this is Recommend Screen"/>
-    </FrameLayout>
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor" />
 </layout>

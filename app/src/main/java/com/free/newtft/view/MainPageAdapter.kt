@@ -5,10 +5,10 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.free.newtft.features.BuildFragment
 import com.free.newtft.features.LoginFragment
-import com.free.newtft.features.RecommendFragment
+import com.free.newtft.features.recommend_teams.RecommendFragment
 import com.free.newtft.features.show_champ.ShowFragment
 
-class MainPageAdapter(val fragmentManager: FragmentManager) : FragmentPagerAdapter(
+class MainPageAdapter(private val fragmentManager: FragmentManager) : FragmentPagerAdapter(
     fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) {
     private val itemPages = mutableListOf<ItemPage>()
