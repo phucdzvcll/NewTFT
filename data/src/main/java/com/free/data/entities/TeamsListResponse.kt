@@ -19,10 +19,5 @@ class TeamsListResponse : ArrayList<TeamsListResponse.TeamItem?>() {
             @SerializedName("traits")
             val traits: List<String>?
         )
-
-        fun listTraits(): MutableList<String> {
-            val list = mutableListOf("fssdfsf","saasd")
-            return list
-        }
     }
 }

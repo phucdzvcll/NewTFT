@@ -2,8 +2,6 @@ package com.free.newtft.features.recommend_teams
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import androidx.databinding.BindingAdapter
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
 import com.free.domain.entities.TeamsRecommendListEntity
@@ -64,26 +62,11 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
                 TeamsRecommend.Champions(
                     id = it.id,
                     name = it.name,
-                    imgUrl = it.name.createImgUrl(),
-                    cost = it.cost
+                    imgUrl = it.name.createImgUrl()
                 )
             )
         }
         return listResult
-    }
-
-    object Binding {
-        @BindingAdapter("data")
-        @JvmStatic
-        fun load(
-            recyclerView: RecyclerView,
-            teamsRecommend: TeamsRecommend
-        ) {
-            val adapterChampsRecommend = AdapterChampsRecommend()
-            adapterChampsRecommend.addData(teamsRecommend)
-            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 5)
-            recyclerView.adapter = adapterChampsRecommend
-        }
     }
 
     data class TeamsRecommend(
@@ -94,8 +77,7 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
         data class Champions(
             val id: String,
             val name: String,
-            val imgUrl: String,
-            val cost: Int
+            val imgUrl: String
         )
     }
 }

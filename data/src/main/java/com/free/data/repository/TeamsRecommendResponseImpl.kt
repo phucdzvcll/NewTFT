@@ -1,7 +1,6 @@
 package com.free.data.repository
 
 import com.free.common_jvm.exception.Failure
-import com.free.common_jvm.extension.default
 import com.free.data.RecommendTeamsApiService
 import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.TeamRecommendListMapper
