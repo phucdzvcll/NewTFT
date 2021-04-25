@@ -8,7 +8,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_android.BaseFragment
-import com.free.domain.entities.TeamsRecommendListEntity
+import com.free.domain.entities.TeamsRecommendEntity
 import com.free.newtft.databinding.FragmentRecommendBinding
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -22,6 +22,7 @@ class RecommendFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         teamsRecommendViewModel.getListTeamsRecommend()
+        teamsRecommendViewModel.test()
         fragmentRecommendBinding = FragmentRecommendBinding.inflate(inflater, container, false)
         fragmentRecommendBinding.lifecycleOwner = viewLifecycleOwner
         fragmentRecommendBinding.teamsRecommendViewModel = teamsRecommendViewModel
@@ -33,10 +34,10 @@ class RecommendFragment : BaseFragment() {
         @JvmStatic
         fun load(
             recyclerView: RecyclerView,
-            teamsRecommendListEntity: TeamsRecommendListEntity
+            teamsRecommendEntity: List<TeamsRecommendEntity>
         ) {
             val adapterTeamRecommend = AdapterTeamRecommend()
-            adapterTeamRecommend.addData(teamsRecommendListEntity)
+            adapterTeamRecommend.addData(teamsRecommendEntity)
             recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
             recyclerView.adapter = adapterTeamRecommend
         }

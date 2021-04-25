@@ -3,27 +3,25 @@ package com.free.data.map
 import com.free.common_jvm.extension.defaultEmpty
 import com.free.common_jvm.extension.defaultZero
 import com.free.common_jvm.mapper.Mapper
-import com.free.data.entities.TeamsListResponse
-import com.free.domain.entities.TeamsRecommendListEntity
+import com.free.data.entities.TeamsResponse
+import com.free.domain.entities.TeamsRecommendEntity
 
-class TeamRecommendListMapper() : Mapper<TeamsListResponse, TeamsRecommendListEntity>() {
-    override fun map(input: TeamsListResponse): TeamsRecommendListEntity {
-        val itemList = input.defaultEmpty().map { teamItem ->
-            TeamsRecommendListEntity.TeamsRecommend(
-                id = teamItem?.id.defaultZero(),
-                rank = teamItem?.rank.defaultEmpty(),
-                listChamps = champListMapper(teamItem?.champions.defaultEmpty())
-            )
-        }
-        return TeamsRecommendListEntity(itemList)
+class TeamRecommendListMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
+    override fun map(input: TeamsResponse?): TeamsRecommendEntity {
+        return TeamsRecommendEntity(
+            id = input?.id.defaultZero(),
+            rank = input?.rank.defaultEmpty(),
+            listChamps = champListMapper(input?.champions.defaultEmpty())
+        )
+
     }
 
-    private fun champListMapper(championsRepose: List<TeamsListResponse.TeamItem.Champion>): List<TeamsRecommendListEntity.TeamsRecommend.Champ> {
+    private fun champListMapper(championsRepose: List<TeamsResponse.Champion>): List<TeamsRecommendEntity.Champ> {
 
-        val listChamp: MutableList<TeamsRecommendListEntity.TeamsRecommend.Champ> = mutableListOf()
+        val champ: MutableList<TeamsRecommendEntity.Champ> = mutableListOf()
         championsRepose.forEach { champion ->
-            listChamp.add(
-                TeamsRecommendListEntity.TeamsRecommend.Champ(
+            champ.add(
+                TeamsRecommendEntity.Champ(
                     id = champion.id.defaultEmpty(),
                     name = champion.id.defaultEmpty(),
                     cost = champion.cost.defaultZero(),
@@ -32,6 +30,6 @@ class TeamRecommendListMapper() : Mapper<TeamsListResponse, TeamsRecommendListEn
                 )
             )
         }
-        return listChamp
+        return champ
     }
 }

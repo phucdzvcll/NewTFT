@@ -6,7 +6,7 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
-import com.free.domain.entities.TeamsRecommendListEntity
+import com.free.domain.entities.TeamsRecommendEntity
 import com.free.newtft.databinding.ItemTeamRecommendBinding
 
 class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecommendViewHolder>() {
@@ -37,15 +37,15 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
 
     override fun getItemCount() = listTeamsRecommend.size
 
-    fun addData(listTeamsRecommendEntity: TeamsRecommendListEntity) {
+    fun addData(listTeamsRecommendEntity: List<TeamsRecommendEntity>) {
         this.listTeamsRecommend.clear()
         this.listTeamsRecommend.addAll(mapper(listTeamsRecommendEntity))
         notifyDataSetChanged()
     }
 
-    private fun mapper(listTeamsRecommendEntity: TeamsRecommendListEntity): MutableList<TeamsRecommend> {
+    private fun mapper(listTeamsRecommendEntity: List<TeamsRecommendEntity>): List<TeamsRecommend> {
         val listTeamsRecommend = mutableListOf<TeamsRecommend>()
-        listTeamsRecommendEntity.listTeams.forEach {
+        listTeamsRecommendEntity.forEach {
             listTeamsRecommend.add(
                 TeamsRecommend(
                     id = it.id,
@@ -57,9 +57,9 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
         return listTeamsRecommend
     }
 
-    private fun mapChampion(listChampsEntity: List<TeamsRecommendListEntity.TeamsRecommend.Champ>): List<TeamsRecommend.Champions> {
+    private fun mapChampion(champsEntity: List<TeamsRecommendEntity.Champ>): List<TeamsRecommend.Champions> {
         val listResult = mutableListOf<TeamsRecommend.Champions>()
-        listChampsEntity.forEach {
+        champsEntity.forEach {
             listResult.add(
                 TeamsRecommend.Champions(
                     id = it.id,

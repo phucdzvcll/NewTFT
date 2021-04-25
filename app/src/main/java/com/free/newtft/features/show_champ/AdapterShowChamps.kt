@@ -5,7 +5,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
 import com.free.common_jvm.extension.defaultZero
-import com.free.domain.entities.ChampsListEntity
+import com.free.domain.entities.ChampsEntity
 import com.free.newtft.R
 import com.free.newtft.databinding.ItemChampBinding
 
@@ -45,9 +45,9 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
     override fun getItemCount() = listChamps.size.defaultZero()
 
 
-    fun setupData(champsListEntity: ChampsListEntity) {
+    fun setupData(champsEntity: List<ChampsEntity>) {
         listChamps.clear()
-        champsListEntity.listChamps.forEach { champ ->
+        champsEntity.forEach { champ ->
             listChamps.add(
                 Champ(
                     id = champ.id,

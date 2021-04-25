@@ -1,9 +1,6 @@
 package com.free.domain.entities
 
-data class TeamsRecommendListEntity(
-    val listTeams: List<TeamsRecommend>
-) {
-    data class TeamsRecommend(
+    data class TeamsRecommendEntity(
         val id: Int,
         val rank: String,
         val listChamps: List<Champ>
@@ -15,4 +12,3 @@ data class TeamsRecommendListEntity(
             val traits: List<String>
         )
     }
-}

@@ -2,13 +2,16 @@ package com.free.data.di
 
 import com.free.data.RecommendTeamsApiService
 import com.free.data.ShowChampApiService
+import com.free.data.TraitsOfTeamRecommendService
 import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.ChampsListMapper
 import com.free.data.map.TeamRecommendListMapper
 import com.free.data.repository.ChampsRepositoryImpl
 import com.free.data.repository.TeamsRecommendResponseImpl
+import com.free.data.repository.TraitsOfTeamsRecommendResponseImpl
 import com.free.domain.repositories.ChampsRepository
 import com.free.domain.repositories.TeamsRecommendRepository
+import com.free.domain.repositories.TraitsOfTeamsRecommendResponse
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -36,6 +39,7 @@ val createRemoteModule = module {
 
     factory { get<Retrofit>().create(ShowChampApiService::class.java) }
     factory { get<Retrofit>().create(RecommendTeamsApiService::class.java) }
+    factory { get<Retrofit>().create(TraitsOfTeamRecommendService::class.java) }
 
     factory { ChampsListMapper() }
     factory { TeamRecommendListMapper() }
@@ -52,6 +56,13 @@ val createRemoteModule = module {
             remoteExceptionInterceptor = get(),
             recommendTeamsApiService = get(),
             teamsRecommendListMapper = get()
+        )
+    }
+
+    single<TraitsOfTeamsRecommendResponse> {
+        TraitsOfTeamsRecommendResponseImpl(
+            remoteExceptionInterceptor = get(),
+            traitsOfTeamRecommendService = get()
         )
     }
 }
