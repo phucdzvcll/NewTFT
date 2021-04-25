@@ -18,9 +18,4 @@ import com.google.gson.annotations.SerializedName
             @SerializedName("traits")
             val traits: List<String>?
         )
-
-        fun listTraits(): MutableList<String> {
-            val list = mutableListOf("fssdfsf","saasd")
-            return list
-        }
     }

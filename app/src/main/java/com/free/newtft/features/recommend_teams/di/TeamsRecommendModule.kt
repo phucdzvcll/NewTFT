@@ -8,8 +8,7 @@ val teamsRecommendModule = module {
     viewModel {
         TeamsRecommendViewModel(
             appDispatchers = get(),
-            getListTeamsRecommendUseCase = get(),
-            getTraitsOfTeamsRecommendUseCase = get()
+            getListTeamsRecommendUseCase = get()
         )
     }
 }

@@ -18,13 +18,11 @@ class ShowChampsViewModel(
     private val getListChampsUseCase: GetListChampsUseCase,
     private val appDispatchers: AppDispatchers
 ) : BaseViewModel() {
-    private val champsEntities: ChampsEntity = createChampsListEntityModel()
-
     var jobListChamps: Job? = null
     val champsListChampsLiveData: MutableLiveData<List<ChampsEntity>> = MutableLiveData()
 
     fun getListChamps() {
-        champsListChampsLiveData.value = listOf(champsEntities)
+        champsListChampsLiveData.value = listOf()
         jobListChamps?.cancel()
         jobListChamps = viewModelScope.launch(appDispatchers.main) {
             val itemResult: Either<Failure, List<ChampsEntity>> =
@@ -37,14 +35,6 @@ class ShowChampsViewModel(
                 champsListChampsLiveData.value = result
             })
         }
-    }
-
-    private fun createChampsListEntityModel(): ChampsEntity {
-        return ChampsEntity(
-            id = "",
-            cost = 0,
-            name = ""
-        )
     }
 
 }

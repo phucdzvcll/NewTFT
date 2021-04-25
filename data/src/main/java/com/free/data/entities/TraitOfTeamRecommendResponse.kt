@@ -3,7 +3,7 @@ package com.free.data.entities
 
 import com.google.gson.annotations.SerializedName
 
- data class TraitOfTeamRecommend(
+ data class TraitOfTeamRecommendResponse(
         @SerializedName("description")
         val description: String?,
         @SerializedName("name")

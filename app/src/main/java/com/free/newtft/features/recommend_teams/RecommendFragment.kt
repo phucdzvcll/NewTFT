@@ -22,7 +22,6 @@ class RecommendFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         teamsRecommendViewModel.getListTeamsRecommend()
-        teamsRecommendViewModel.test()
         fragmentRecommendBinding = FragmentRecommendBinding.inflate(inflater, container, false)
         fragmentRecommendBinding.lifecycleOwner = viewLifecycleOwner
         fragmentRecommendBinding.teamsRecommendViewModel = teamsRecommendViewModel

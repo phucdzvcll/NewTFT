@@ -5,13 +5,12 @@ import com.free.data.ShowChampApiService
 import com.free.data.TraitsOfTeamRecommendService
 import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.ChampsListMapper
-import com.free.data.map.TeamRecommendListMapper
+import com.free.data.map.TraitsListMapper
+import com.free.data.map.TeamRecommendMapper
 import com.free.data.repository.ChampsRepositoryImpl
 import com.free.data.repository.TeamsRecommendResponseImpl
-import com.free.data.repository.TraitsOfTeamsRecommendResponseImpl
 import com.free.domain.repositories.ChampsRepository
 import com.free.domain.repositories.TeamsRecommendRepository
-import com.free.domain.repositories.TraitsOfTeamsRecommendResponse
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -42,7 +41,9 @@ val createRemoteModule = module {
     factory { get<Retrofit>().create(TraitsOfTeamRecommendService::class.java) }
 
     factory { ChampsListMapper() }
-    factory { TeamRecommendListMapper() }
+    factory { TeamRecommendMapper() }
+    factory { TraitsListMapper() }
+
     single<ChampsRepository> {
         ChampsRepositoryImpl(
             remoteExceptionInterceptor = get(),
@@ -55,14 +56,9 @@ val createRemoteModule = module {
         TeamsRecommendResponseImpl(
             remoteExceptionInterceptor = get(),
             recommendTeamsApiService = get(),
-            teamsRecommendListMapper = get()
-        )
-    }
-
-    single<TraitsOfTeamsRecommendResponse> {
-        TraitsOfTeamsRecommendResponseImpl(
-            remoteExceptionInterceptor = get(),
-            traitsOfTeamRecommendService = get()
+            teamsRecommendMapper = get(),
+            traitsOfTeamRecommendService = get(),
+            traitsListMapper = get()
         )
     }
 }

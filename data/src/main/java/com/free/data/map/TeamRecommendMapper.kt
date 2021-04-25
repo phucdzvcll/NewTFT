@@ -6,12 +6,15 @@ import com.free.common_jvm.mapper.Mapper
 import com.free.data.entities.TeamsResponse
 import com.free.domain.entities.TeamsRecommendEntity
 
-class TeamRecommendListMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
+class TeamRecommendMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
     override fun map(input: TeamsResponse?): TeamsRecommendEntity {
         return TeamsRecommendEntity(
             id = input?.id.defaultZero(),
             rank = input?.rank.defaultEmpty(),
-            listChamps = champListMapper(input?.champions.defaultEmpty())
+            listChamps = champListMapper(input?.champions.defaultEmpty()).distinct(),
+            listTraits = listOf(
+                TeamsRecommendEntity.Trait(name = "", style = "", amountTraits = 0)
+            )
         )
 
     }
