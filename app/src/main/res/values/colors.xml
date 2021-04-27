@@ -10,10 +10,16 @@
 
     <color name="color_white">#ffffff</color>
     <color name="color_f400">#f40009</color>
+    <color name="color_ffe9">#6FFFE9</color>
+    <color name="color_4f60">#2b4f60</color>
+    <color name="color_a62b">#FFA62B</color>
+    <color name="color_e2df">#EEE2DF</color>
+    <color name="color_9f9c">#C89F9C</color>
+    <color name="color_697a">#16697A</color>
     <color name="color_00d5">#00d555</color>
     <color name="color_black">#000000</color>
     <color name="colorAccent">#f40009</color>
-    <color name="backgroundColor">#5E4D45</color>
-    <color name="backgroundTabLayout">#BDDACA</color>
-    <color name="backgroundCardView">#A9E4DE</color>
+    <color name="backgroundColor">#3A506B</color>
+    <color name="backgroundTabLayout">#0B132B</color>
+    <color name="backgroundCardView">#1C2541</color>
 </resources>

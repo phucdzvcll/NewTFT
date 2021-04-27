@@ -50,7 +50,8 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
                 TeamsRecommend(
                     id = it.id,
                     rank = it.rank,
-                    champions = mapChampion(it.listChamps)
+                    champions = mapChampion(it.listChamps),
+                    listTraits = mapTraits(it.listTraits)
                 )
             )
         }
@@ -72,6 +73,25 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
         return listResult
     }
 
+    private fun mapTraits(listTraitsEntity: List<TeamsRecommendEntity.Trait>): List<TeamsRecommend.Trait> {
+        val listResult = mutableListOf<TeamsRecommend.Trait>()
+        listTraitsEntity.forEach {
+            listResult.add(
+                TeamsRecommend.Trait(
+                    amount = it.amountTraits,
+                    isVisible = it.style != "none",
+                    name = if (it.style != "none") {
+                        it.name
+                    } else {
+                        ""
+                    }
+                )
+            )
+        }
+        listResult.sortByDescending { it.isVisible }
+        return listResult
+    }
+
     object Binding {
         @BindingAdapter("data")
         @JvmStatic
@@ -89,13 +109,20 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
     data class TeamsRecommend(
         val id: Int,
         val rank: String,
-        val champions: List<Champions>
+        val champions: List<Champions>,
+        val listTraits: List<Trait>
     ) {
         data class Champions(
             val id: String,
             val name: String,
             val imgUrl: String,
             val cost: Int
+        )
+
+        data class Trait(
+            val isVisible: Boolean,
+            val name: String,
+            val amount: Int
         )
     }
 }

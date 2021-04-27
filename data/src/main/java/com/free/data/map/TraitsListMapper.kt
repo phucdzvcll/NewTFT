@@ -9,9 +9,10 @@ class TraitsListMapper {
 
     fun map(
         listTraitsResponse: List<TraitOfTeamRecommendResponse>,
-        grouping: Map<String, Int>
+        list: List<String>
     ): MutableList<TeamsRecommendEntity.Trait> {
         val listTraitsEntity = mutableListOf<TeamsRecommendEntity.Trait>()
+        val grouping = list.groupingBy { it }.eachCount()
         listTraitsResponse.forEach {
             listTraitsEntity.add(
                 TeamsRecommendEntity.Trait(
@@ -30,8 +31,15 @@ class TraitsListMapper {
     ): String {
         var style = "none"
         traitOfTeamRecommendResponse.sets?.forEach {
-            if (amount >= it.min.defaultZero())
-                style = it.style.defaultEmpty()
+            if (it.max != null) {
+                if (amount >= it.min.defaultZero() && amount <= it.max.defaultZero()) {
+                    style = it.style.defaultEmpty()
+                }
+            } else {
+                if (amount >= it.min.defaultZero()) {
+                    style = it.style.defaultEmpty()
+                }
+            }
         }
         return style
     }

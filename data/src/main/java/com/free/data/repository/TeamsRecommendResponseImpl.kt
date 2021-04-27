@@ -32,12 +32,13 @@ class TeamsRecommendResponseImpl(
     private suspend fun getListTeamsRecommendEntity(teamResponses: List<TeamsResponse>): List<TeamsRecommendEntity> {
         val teamEntities = mutableListOf<TeamsRecommendEntity>()
         teamResponses.forEach { team ->
-            val keyParams = listKeyParam(team)
+            val traitsOfTeamResponse =
+                traitsOfTeamRecommendService.getTraitsOfTeamsRecommend(listKeyParam(team).distinct())
+                    .distinct()
+            traitsOfTeamRecommendService
             val traitEntities =
                 traitsListMapper.map(
-                    listTraitsResponse = traitsOfTeamRecommendService.getTraitsOfTeamsRecommend(
-                        keys = keyParams.distinct()
-                    ), grouping = keyParams.groupingBy { it }.eachCount()
+                    listTraitsResponse = traitsOfTeamResponse, list = listKeyParam(team)
                 )
             teamEntities.add(
                 teamsRecommendMapper.map(team).copy(listTraits = traitEntities)
@@ -48,7 +49,7 @@ class TeamsRecommendResponseImpl(
 
     private fun listKeyParam(teamsResponse: TeamsResponse): MutableList<String> {
         val listString = mutableListOf<String>()
-        teamsResponse.champions?.forEach { champion ->
+        teamsResponse.champions?.distinct()?.forEach { champion ->
             listString.addAll(champion.traits.defaultEmpty())
         }
         return listString
