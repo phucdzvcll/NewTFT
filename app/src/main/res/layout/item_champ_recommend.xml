@@ -8,13 +8,21 @@
             type="com.free.newtft.features.recommend_teams.AdapterChampsRecommend.Champion" />
     </data>
 
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_gravity="center">
 
-    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/imgChamp"
-        imgUrl="@{champ.imgUrl}"
-        android:layout_width="@dimen/dp_41"
-        android:layout_height="@dimen/dp_41"
-        android:layout_margin="@dimen/dp_3"
-        android:contentDescription="@string/no_image" />
+        <ImageView
+            android:id="@+id/imgChamp"
+            imgUrl="@{champ.imgUrl}"
+            android:layout_gravity="center"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:layout_margin="@dimen/dp_2"
+            android:contentDescription="@string/no_image" />
+    </LinearLayout>
+
 </layout>
 

@@ -14,11 +14,16 @@ class TraitsListMapper {
         val listTraitsEntity = mutableListOf<TeamsRecommendEntity.Trait>()
         val grouping = list.groupingBy { it }.eachCount()
         listTraitsResponse.forEach {
+            val style = setStyle(it, grouping[it.name].defaultZero())
             listTraitsEntity.add(
                 TeamsRecommendEntity.Trait(
-                    name = it.name.defaultEmpty(),
+                    name = if (style != "none") {
+                        it.name.defaultEmpty()
+                    } else {
+                        ""
+                    },
                     amountTraits = grouping[it.name].defaultZero(),
-                    style = setStyle(it, grouping[it.name].defaultZero())
+                    style = style
                 )
             )
         }

@@ -1,13 +1,21 @@
 package com.free.newtft.features.recommend_teams
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.LinearLayout
+import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
+import com.free.common_jvm.extension.defaultZero
 import com.free.domain.entities.TeamsRecommendEntity
+import com.free.newtft.R
 import com.free.newtft.databinding.ItemTeamRecommendBinding
+import java.util.*
 
 class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecommendViewHolder>() {
 
@@ -75,21 +83,41 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
 
     private fun mapTraits(listTraitsEntity: List<TeamsRecommendEntity.Trait>): List<TeamsRecommend.Trait> {
         val listResult = mutableListOf<TeamsRecommend.Trait>()
-        listTraitsEntity.forEach {
+        sortUsers(listTraitsEntity).forEach {
+            val isVisible = it.style != "none"
             listResult.add(
                 TeamsRecommend.Trait(
-                    amount = it.amountTraits,
-                    isVisible = it.style != "none",
-                    name = if (it.style != "none") {
-                        it.name
+                    amount = if (isVisible) {
+                        it.amountTraits.toString()
                     } else {
                         ""
-                    }
+                    },
+                    isVisible = isVisible,
+                    imgUrl = "https://rerollcdn.com/icons/" + it.name.toLowerCase(Locale.ROOT) + ".png",
+                    name = it.name,
+                    style = it.style
                 )
             )
         }
         listResult.sortByDescending { it.isVisible }
         return listResult
+    }
+
+    private fun sortUsers(trait: List<TeamsRecommendEntity.Trait>): List<TeamsRecommendEntity.Trait> {
+        val roles: HashMap<String, Int> = hashMapOf(
+            "none" to 0,
+            "bronze" to 1,
+            "silver" to 2,
+            "gold" to 3,
+            "chromatic" to 4
+        )
+        val comparator =
+            Comparator { o1: TeamsRecommendEntity.Trait, o2: TeamsRecommendEntity.Trait ->
+                return@Comparator roles[o2.style].defaultZero() - roles[o1.style].defaultZero()
+            }
+        val copy = arrayListOf<TeamsRecommendEntity.Trait>().apply { addAll(trait) }
+        copy.sortWith(comparator)
+        return copy
     }
 
     object Binding {
@@ -101,8 +129,34 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
         ) {
             val adapterChampsRecommend = AdapterChampsRecommend()
             adapterChampsRecommend.addData(teamsRecommend)
-            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 5)
+            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 8)
             recyclerView.adapter = adapterChampsRecommend
+        }
+
+        @BindingAdapter("setBackground")
+        @JvmStatic
+        fun background(
+            constraintLayout: ConstraintLayout,
+            style: String
+        ) {
+            when (style) {
+                "bronze" -> constraintLayout.background = ContextCompat.getDrawable(
+                    constraintLayout.context,
+                    R.drawable.layout_bg_bzone
+                )
+                "silver" -> constraintLayout.background = ContextCompat.getDrawable(
+                    constraintLayout.context,
+                    R.drawable.layout_bg_silver
+                )
+                "gold" -> constraintLayout.background = ContextCompat.getDrawable(
+                    constraintLayout.context,
+                    R.drawable.layout_bg_gold
+                )
+                "chromatic" -> constraintLayout.background = ContextCompat.getDrawable(
+                    constraintLayout.context,
+                    R.drawable.layout_bg_chromatic
+                )
+            }
         }
     }
 
@@ -120,9 +174,11 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
         )
 
         data class Trait(
+            val style: String,
             val isVisible: Boolean,
             val name: String,
-            val amount: Int
+            val amount: String,
+            val imgUrl: String
         )
     }
 }
