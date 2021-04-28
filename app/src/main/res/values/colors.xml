@@ -9,9 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="color_white">#ffffff</color>
-    <color name="color_bronze">#9A7958</color>
-    <color name="color_silver">#717171</color>
-    <color name="color_gold">#88783E</color>
+    <color name="color_bronze">#9C7757</color>
+    <color name="color_silver">#9E9E9E</color>
+    <color name="color_gold">#C6AA41</color>
     <color name="color_chromatic">#3D7561</color>
     <color name="color_f400">#f40009</color>
     <color name="color_ffe9">#6FFFE9</color>

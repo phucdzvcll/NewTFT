@@ -55,7 +55,8 @@ class AdapterChampsRecommend :
                     id = it.id,
                     name = it.name,
                     imgUrl = it.imgUrl,
-                    cost = it.cost
+                    cost = it.cost,
+                    isThreeStars = it.isThreeStars
                 )
             )
         }
@@ -63,6 +64,7 @@ class AdapterChampsRecommend :
     }
 
     data class Champion(
+        val isThreeStars: Boolean,
         val id: String,
         val name: String,
         val cost: Int,

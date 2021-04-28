@@ -15,4 +15,5 @@
     <dimen name="dp_41">41dp</dimen>
     <dimen name="dp_16">16dp</dimen>
     <dimen name="dp_6">6dp</dimen>
+    <dimen name="dp_30">30dp</dimen>
 </resources>

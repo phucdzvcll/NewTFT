@@ -1,6 +1,7 @@
 package com.free.data.map
 
 import com.free.common_jvm.extension.defaultEmpty
+import com.free.common_jvm.extension.defaultFalse
 import com.free.common_jvm.extension.defaultZero
 import com.free.common_jvm.mapper.Mapper
 import com.free.data.entities.TeamsResponse
@@ -28,8 +29,8 @@ class TeamRecommendMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
                     id = champion.id.defaultEmpty(),
                     name = champion.id.defaultEmpty(),
                     cost = champion.cost.defaultZero(),
-                    traits = champion.traits.defaultEmpty()
-
+                    traits = champion.traits.defaultEmpty(),
+                    isThreeStars = champion.isThreeStars.defaultFalse()
                 )
             )
         }

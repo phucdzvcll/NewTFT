@@ -7,6 +7,7 @@ data class TeamsRecommendEntity(
     val listTraits: List<Trait>
 ) {
     data class Champ(
+        val isThreeStars: Boolean,
         val name: String,
         val id: String,
         val cost: Int,
