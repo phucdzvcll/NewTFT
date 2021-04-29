@@ -21,7 +21,7 @@
 
         <ImageView
             android:id="@+id/imgView"
-            imgUrl="@{trait.imgUrl}"
+            loadImage="@{trait.imgUrl}"
             android:layout_width="@dimen/dp_16"
             android:layout_height="@dimen/dp_16"
             android:layout_gravity="center"

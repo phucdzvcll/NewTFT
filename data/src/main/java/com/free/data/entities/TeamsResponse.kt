@@ -18,6 +18,10 @@ data class TeamsResponse(
         @SerializedName("traits")
         val traits: List<String>?,
         @SerializedName("isThreeStars")
-        val isThreeStars: Boolean?
+        val isThreeStars: Boolean?,
+        @SerializedName("especiallyItem")
+        val especiallyItem: List<String>?,
+        @SerializedName("items")
+        val items: List<String>?
     )
 }

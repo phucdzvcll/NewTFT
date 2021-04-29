@@ -30,10 +30,12 @@ class TeamRecommendMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
                     name = champion.id.defaultEmpty(),
                     cost = champion.cost.defaultZero(),
                     traits = champion.traits.defaultEmpty(),
-                    isThreeStars = champion.isThreeStars.defaultFalse()
+                    isThreeStars = champion.isThreeStars.defaultFalse(),
+                    items = champion.items.defaultEmpty()
                 )
             )
         }
+        champ.sortBy { it.cost }
         return champ
     }
 }

@@ -1,13 +1,17 @@
 package com.free.newtft.features.recommend_teams
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
 import com.free.domain.entities.TeamsRecommendEntity
 import com.free.newtft.databinding.ItemTeamRecommendBinding
+import java.util.Arrays.sort
+import java.util.Collections.sort
 
 class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecommendViewHolder>() {
 
@@ -55,6 +59,11 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
                 )
             )
         }
+
+        val comparator =
+            Comparator.comparingInt { team: TeamsRecommend -> if (team.rank.startsWith("S")) 0 else 1 }
+        listTeamsRecommend.sortBy { it.rank }
+        listTeamsRecommend.sortWith(comparator)
         return listTeamsRecommend
     }
 
@@ -67,7 +76,8 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
                     name = it.name,
                     imgUrl = it.name.createImgUrl(),
                     cost = it.cost,
-                    isThreeStars = it.isThreeStars
+                    isThreeStars = it.isThreeStars,
+                    items = it.items
                 )
             )
         }
@@ -98,7 +108,7 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
         ) {
             val adapterChampsRecommend = AdapterChampsRecommend()
             adapterChampsRecommend.addData(teamsRecommend)
-            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 8)
+            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 4)
             recyclerView.adapter = adapterChampsRecommend
         }
 
@@ -113,6 +123,22 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
             recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 6)
             recyclerView.adapter = adapterTraitsTeamRecommend
         }
+
+        @BindingAdapter("setRank")
+        @JvmStatic
+        fun setRank(
+            textView: TextView,
+            rank: String
+        ) {
+            when (rank) {
+                "S" -> textView.setTextColor(Color.YELLOW)
+                "A" -> textView.setTextColor(Color.RED)
+                "B" -> textView.setTextColor(Color.BLUE)
+                "C" -> textView.setTextColor(Color.GREEN)
+                else -> textView.setTextColor(Color.GRAY)
+            }
+            textView.text = rank
+        }
     }
 
     data class TeamsRecommend(
@@ -126,7 +152,8 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
             val id: String,
             val name: String,
             val imgUrl: String,
-            val cost: Int
+            val cost: Int,
+            val items: List<String>
         )
 
         data class Trait(

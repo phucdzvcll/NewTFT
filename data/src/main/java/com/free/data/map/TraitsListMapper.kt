@@ -27,6 +27,7 @@ class TraitsListMapper {
                 )
             )
         }
+        listTraitsEntity.sortByDescending { it.amountTraits }
         return listTraitsEntity
     }
 

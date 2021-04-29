@@ -11,7 +11,8 @@ data class TeamsRecommendEntity(
         val name: String,
         val id: String,
         val cost: Int,
-        val traits: List<String>
+        val traits: List<String>,
+        val items: List<String>
     )
 
     data class Trait(

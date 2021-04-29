@@ -50,6 +50,9 @@ class TeamsRecommendResponseImpl(
     private fun listKeyParam(teamsResponse: TeamsResponse): MutableList<String> {
         val listString = mutableListOf<String>()
         teamsResponse.champions?.distinct()?.forEach { champion ->
+            if (champion.especiallyItem!=null && champion.especiallyItem.isNotEmpty()){
+                listString.addAll(champion.especiallyItem)
+            }
             listString.addAll(champion.traits.defaultEmpty())
         }
         return listString
