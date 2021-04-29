@@ -1,4 +1,4 @@
-package com.free.newtft.features
+package com.free.newtft.features.main
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -14,7 +14,7 @@ class BuildFragment : BaseFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         return FragmentBuildBinding.inflate(inflater, container, false).root
     }
 

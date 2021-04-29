@@ -1,4 +1,4 @@
-package com.free.newtft.features.recommend_teams
+package com.free.newtft.features.main.recommend_teams
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

@@ -6,7 +6,7 @@
 
         <variable
             name="trait"
-            type="com.free.newtft.features.recommend_teams.AdapterTraitsTeamRecommend.Trait" />
+            type="com.free.newtft.features.main.recommend_teams.AdapterTraitsTeamRecommend.Trait" />
     </data>
 
     <LinearLayout

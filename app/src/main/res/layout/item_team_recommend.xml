@@ -8,7 +8,7 @@
 
         <variable
             name="team"
-            type="com.free.newtft.features.recommend_teams.AdapterTeamRecommend.TeamsRecommend" />
+            type="com.free.newtft.features.main.recommend_teams.AdapterTeamRecommend.TeamsRecommend" />
     </data>
 
     <androidx.cardview.widget.CardView

@@ -1,6 +1,6 @@
-package com.free.newtft.features.recommend_teams.di
+package com.free.newtft.features.main.recommend_teams.di
 
-import com.free.newtft.features.recommend_teams.TeamsRecommendViewModel
+import com.free.newtft.features.main.recommend_teams.TeamsRecommendViewModel
 import org.koin.android.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 

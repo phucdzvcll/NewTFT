@@ -1,7 +1,8 @@
-package com.free.newtft.features.show_champ
+package com.free.newtft.features.main.show_champ
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
 import com.free.common_jvm.extension.defaultZero
@@ -11,13 +12,15 @@ import com.free.newtft.databinding.ItemChampBinding
 
 class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHolder>() {
 
-    private val listChamps = mutableListOf<Champ>()
+    val championLiveData: MutableLiveData<Champ> = MutableLiveData()
+
+    private val listChamps = mutableListOf<ViewBinderModel>()
 
     class ShowChampViewHolder(private val binding: ItemChampBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(champ: Champ) {
-            binding.champ = champ
-            when (champ.cost) {
+        fun bind(viewBinderModel: ViewBinderModel) {
+            binding.viewBinderModel = viewBinderModel
+            when (viewBinderModel.champ.cost) {
                 1 -> binding.imgChamp.setBackgroundResource(R.drawable.border_gray)
                 2 -> binding.imgChamp.setBackgroundResource(R.drawable.border_green)
                 3 -> binding.imgChamp.setBackgroundResource(R.drawable.border_blue)
@@ -39,7 +42,7 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
     }
 
     override fun onBindViewHolder(holder: ShowChampViewHolder, position: Int) {
-        holder.bind(listChamps[position])
+        holder.bind(ViewBinderModel(champ = listChamps[position].champ, championLiveData))
     }
 
     override fun getItemCount() = listChamps.size.defaultZero()
@@ -49,15 +52,18 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
         listChamps.clear()
         champsEntity.forEach { champ ->
             listChamps.add(
-                Champ(
-                    id = champ.id,
-                    cost = champ.cost,
-                    name = champ.name,
-                    imgUrl = champ.name.createImgUrl()
+                ViewBinderModel(
+                    Champ(
+                        id = champ.id,
+                        cost = champ.cost,
+                        name = champ.name,
+                        imgUrl = champ.name.createImgUrl()
+                    ),
+                    itemClickLiveData = championLiveData
                 )
             )
         }
-        listChamps.sortBy { it.cost }
+        listChamps.sortBy { it.champ.cost }
         notifyDataSetChanged()
     }
 
@@ -67,4 +73,13 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
         val cost: Int,
         val imgUrl: String
     )
+
+    data class ViewBinderModel(
+        val champ: Champ,
+        val itemClickLiveData: MutableLiveData<Champ>
+    ) {
+        fun onItemClick() {
+            itemClickLiveData.value = champ
+        }
+    }
 }
