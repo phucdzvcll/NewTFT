@@ -2,8 +2,7 @@ package com.free.data.entities
 
 import com.google.gson.annotations.SerializedName
 
-class ChampionsListResponse : ArrayList<ChampionsListResponse.Champion?>() {
-    data class Champion(
+    data class ChampionResponse(
         @SerializedName("cost")
         val cost: Int?,
         @SerializedName("id")
@@ -13,5 +12,4 @@ class ChampionsListResponse : ArrayList<ChampionsListResponse.Champion?>() {
         @SerializedName("traits")
         val traits: List<String>?
     )
-}
 

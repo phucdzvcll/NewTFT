@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="champ"
+            type="com.free.newtft.features.recommend_teams.AdapterChampsRecommend.Champion" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="@+id/item1"
+        app:layout_constraintStart_toEndOf="@+id/item1">
+
+        <ImageView
+            android:id="@+id/imgChamp"
+            loadImage="@{champ.imgUrl}"
+            android:layout_width="@dimen/dp_61"
+            android:layout_height="@dimen/dp_61"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dp_8"
+            android:layout_marginBottom="@dimen/dp_8"
+            android:contentDescription="@string/no_image"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="@dimen/dp_35"
+            android:layout_height="@dimen/dp_35"
+            android:layout_marginBottom="@dimen/dp_65"
+            android:contentDescription="@string/no_image"
+            android:scaleType="fitXY"
+            android:src="@drawable/ic_three_stars"
+            android:visibility="@{champ.isThreeStars ? View.VISIBLE : View.GONE, default = gone }"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:visibility="visible" />
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dp_55"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/imgChamp">
+
+            <ImageView
+                android:id="@+id/item1"
+                loadImage="@{champ.items[0].imgUrl}"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:background="@drawable/border_item"
+                android:visibility="@{champ.items[0].isVisible ? View.VISIBLE : View.GONE, default=visible }"
+                tools:src="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/item2"
+                loadImage="@{champ.items[1].imgUrl}"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:layout_marginStart="@dimen/dp_4"
+                android:layout_marginEnd="@dimen/dp_4"
+                android:background="@drawable/border_item"
+                android:visibility="@{champ.items[1].isVisible ? View.VISIBLE : View.GONE, default=visible }"
+                tools:src="@tools:sample/avatars" />
+
+            <ImageView
+                android:id="@+id/item3"
+                loadImage="@{champ.items[2].imgUrl}"
+                android:layout_width="@dimen/dp_20"
+                android:layout_height="@dimen/dp_20"
+                android:background="@drawable/border_item"
+                android:visibility="@{champ.items[2].isVisible ? View.VISIBLE : View.GONE, default=visible }"
+                tools:src="@tools:sample/avatars" />
+        </LinearLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>
+

@@ -6,7 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.free.common_android.AppDispatchers
 import com.free.common_android.BaseViewModel
 import com.free.common_jvm.exception.Failure
-import com.free.domain.entities.ChampsListEntity
+import com.free.domain.entities.ChampsEntity
 import com.free.domain.usecases.base.UseCaseParams
 import com.free.domain.usecases.show_champ.GetListChampsUseCase
 import com.toast.comico.vn.common_jvm.functional.Either
@@ -18,16 +18,14 @@ class ShowChampsViewModel(
     private val getListChampsUseCase: GetListChampsUseCase,
     private val appDispatchers: AppDispatchers
 ) : BaseViewModel() {
-    private val champsListEntities: ChampsListEntity = createChampsListEntityModel()
-
     var jobListChamps: Job? = null
-    val champsListChampsLiveData: MutableLiveData<ChampsListEntity> = MutableLiveData()
+    val champsListChampsLiveData: MutableLiveData<List<ChampsEntity>> = MutableLiveData()
 
     fun getListChamps() {
-        champsListChampsLiveData.value = champsListEntities
+        champsListChampsLiveData.value = listOf()
         jobListChamps?.cancel()
         jobListChamps = viewModelScope.launch(appDispatchers.main) {
-            val itemResult: Either<Failure, ChampsListEntity> =
+            val itemResult: Either<Failure, List<ChampsEntity>> =
                 withContext(appDispatchers.io) {
                     getListChampsUseCase.execute(UseCaseParams.Empty)
                 }
@@ -37,15 +35,6 @@ class ShowChampsViewModel(
                 champsListChampsLiveData.value = result
             })
         }
-    }
-    private fun createChampsListEntityModel(): ChampsListEntity{
-        return ChampsListEntity(listOf(
-            ChampsListEntity.Champ(
-                id = "",
-                cost = 0,
-                name = ""
-            )
-        ))
     }
 
 }

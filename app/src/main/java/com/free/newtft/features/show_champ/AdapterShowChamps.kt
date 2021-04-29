@@ -1,12 +1,11 @@
 package com.free.newtft.features.show_champ
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
-import com.bumptech.glide.Glide
+import com.free.common_jvm.extension.createImgUrl
 import com.free.common_jvm.extension.defaultZero
-import com.free.domain.entities.ChampsListEntity
+import com.free.domain.entities.ChampsEntity
 import com.free.newtft.R
 import com.free.newtft.databinding.ItemChampBinding
 
@@ -46,31 +45,20 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
     override fun getItemCount() = listChamps.size.defaultZero()
 
 
-    fun setupData(champsListEntity: ChampsListEntity) {
-        val url = "https://rerollcdn.com/characters/Skin/4.5/"
+    fun setupData(champsEntity: List<ChampsEntity>) {
         listChamps.clear()
-        champsListEntity.listChamps.forEach { champ ->
+        champsEntity.forEach { champ ->
             listChamps.add(
                 Champ(
                     id = champ.id,
                     cost = champ.cost,
                     name = champ.name,
-                    imgUrl = url + reName(champ.name) + ".png"
+                    imgUrl = champ.name.createImgUrl()
                 )
             )
         }
         listChamps.sortBy { it.cost }
         notifyDataSetChanged()
-    }
-
-    private fun reName(name: String): String {
-        return if (name == "Cho'Gath") {
-            "Chogath"
-        } else if (name == "Nunu & Willump") {
-            "Nunu"
-        } else {
-            name.replace(" ", "")
-        }
     }
 
     data class Champ(

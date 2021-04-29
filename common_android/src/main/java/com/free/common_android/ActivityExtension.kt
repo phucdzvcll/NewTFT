@@ -1,6 +1,5 @@
 package com.free.common_android
 
-import android.content.res.Resources
 import androidx.fragment.app.DialogFragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentManager
@@ -14,7 +13,7 @@ inline fun FragmentManager.inTransactionToBackStack(func: FragmentTransaction.()
     beginTransaction().func().addToBackStack(null).commit()
 }
 
-fun FragmentActivity.addFragment(fragment: BaseFragment, frameId: Int){
+fun FragmentActivity.addFragment(fragment: BaseFragment, frameId: Int) {
     if (supportFragmentManager.isStateSaved) {
         return
     }
@@ -25,21 +24,7 @@ fun FragmentActivity.replaceFragment(fragment: BaseFragment, frameId: Int) {
     if (supportFragmentManager.isStateSaved) {
         return
     }
-    supportFragmentManager.inTransaction{replace(frameId, fragment)}
-}
-
-fun FragmentActivity.replaceFragmentToBackStack(fragment: BaseFragment, frameId: Int) {
-    if (supportFragmentManager.isStateSaved) {
-        return
-    }
-    supportFragmentManager.inTransactionToBackStack{replace(frameId, fragment)}
-}
-
-fun FragmentActivity.popFragment() {
-    if (supportFragmentManager.isStateSaved) {
-        return
-    }
-    supportFragmentManager.popBackStackImmediate()
+    supportFragmentManager.inTransaction { replace(frameId, fragment) }
 }
 
 fun FragmentActivity.addFragmentDialog(fragment: DialogFragment) {
@@ -51,14 +36,5 @@ fun FragmentActivity.addFragmentDialog(fragment: DialogFragment) {
         ex.printStackTrace()
     }
 }
-
-val Int.pxToDp: Int
-    get() = (this / Resources.getSystem().displayMetrics.density).toInt()
-
-val Int.dpToPx: Int
-    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
-
-val Double.dpToPx: Int
-    get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
 
