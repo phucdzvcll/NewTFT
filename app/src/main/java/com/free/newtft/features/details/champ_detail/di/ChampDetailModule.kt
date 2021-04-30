@@ -7,7 +7,7 @@ import org.koin.dsl.module
 val champDetailModule = module {
     viewModel {
         ChampDetailViewModel(
-            appDispatchers = get(), getChampDetailUseCase = get()
+            appDispatchers = get(), getTraitsDetailUseCase = get(), getChampDetailUseCase = get()
         )
     }
 }

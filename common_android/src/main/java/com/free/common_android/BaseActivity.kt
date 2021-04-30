@@ -1,9 +1,7 @@
 package com.free.common_android
 
 import android.os.Bundle
-import android.os.PersistableBundle
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import com.free.common_android.navigation.NavigateAction
 import com.free.common_android.navigation.NavigateViewModel
 import org.koin.android.viewmodel.ext.android.viewModel

@@ -2,14 +2,14 @@ package com.free.newtft.features.details
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import com.free.common_android.BaseActivity
 import com.free.common_android.replaceFragment
 import com.free.newtft.R
 import com.free.newtft.features.details.champ_detail.view.ChampDetailFragment
 
-class DetailActivity : AppCompatActivity() {
+class DetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_detail)

@@ -4,8 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.BindingAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.drakeet.multitype.MultiTypeAdapter
 import com.free.common_android.BaseFragment
 import com.free.newtft.databinding.FragmentChampDetailBinding
+import com.free.newtft.features.details.champ_detail.viewbinder.HeaderChampDetailViewBinder
 import com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -14,6 +18,7 @@ class ChampDetailFragment : BaseFragment() {
     private lateinit var detailFragmentBinding: FragmentChampDetailBinding
     private val detailViewModel: ChampDetailViewModel by viewModel()
     private var champId: String? = null
+    private val detailAdapter = MultiTypeAdapter()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         champId = getChampIdFromBundle(this)
@@ -25,6 +30,8 @@ class ChampDetailFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View {
         detailFragmentBinding = FragmentChampDetailBinding.inflate(inflater, container, false)
+        detailFragmentBinding.detailChampViewModel = detailViewModel
+        detailFragmentBinding.lifecycleOwner = viewLifecycleOwner
         return detailFragmentBinding.root
     }
 
@@ -33,6 +40,18 @@ class ChampDetailFragment : BaseFragment() {
         champId?.let {
             detailViewModel.getChampDetail(it)
         }
+        initView()
+    }
+
+    private fun initView() {
+        detailFragmentBinding.imgDetailBack.setOnClickListener {
+            navigateBack()
+        }
+
+        val headerChampDetailViewBinder = HeaderChampDetailViewBinder()
+        detailAdapter.register(headerChampDetailViewBinder)
+
+        detailFragmentBinding.detailRecyclerView.adapter = detailAdapter
     }
 
     companion object {
@@ -53,6 +72,20 @@ class ChampDetailFragment : BaseFragment() {
                 }
             }
             return null
+        }
+    }
+
+    object Binding {
+        @BindingAdapter("items")
+        @JvmStatic
+        fun setItem(
+            recyclerView: RecyclerView,
+            champDetailModel: ChampDetailViewModel.DetailChampModel
+        ) {
+            val mapper = HeaderChampDetailViewBinder.HeaderModelMapper()
+            val item = mapper.map(champDetailModel)
+            recyclerView.adapter?.notifyDataSetChanged()
+            (recyclerView.adapter as MultiTypeAdapter).items = listOf(item)
         }
     }
 }

@@ -5,10 +5,7 @@ import com.free.data.RecommendTeamsApiService
 import com.free.data.ShowChampApiService
 import com.free.data.TraitsOfTeamRecommendService
 import com.free.data.exception_interceptor.RemoteExceptionInterceptor
-import com.free.data.map.ChampDetailMapper
-import com.free.data.map.ChampsListMapper
-import com.free.data.map.TraitsListMapper
-import com.free.data.map.TeamRecommendMapper
+import com.free.data.map.*
 import com.free.data.repository.ChampDetailRepositoryImpl
 import com.free.data.repository.ChampsRepositoryImpl
 import com.free.data.repository.TeamsRecommendResponseImpl
@@ -49,6 +46,8 @@ val createRemoteModule = module {
     factory { TeamRecommendMapper() }
     factory { TraitsListMapper() }
     factory { ChampDetailMapper() }
+    factory { TraitsDetailMapper() }
+    factory { ChampOfTraitDetailMapper() }
 
     single<ChampsRepository> {
         ChampsRepositoryImpl(
@@ -72,6 +71,8 @@ val createRemoteModule = module {
         ChampDetailRepositoryImpl(
             remoteExceptionInterceptor = get(),
             champDetailApiService = get(),
+            champOfTraitDetailMapper = get(),
+            traitsDetailMapper = get(),
             champDetailMapper = get()
         )
     }
