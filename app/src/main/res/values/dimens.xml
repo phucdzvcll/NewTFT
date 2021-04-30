@@ -21,4 +21,7 @@
     <dimen name="dp_14">14dp</dimen>
     <dimen name="dp_18">18dp</dimen>
     <dimen name="dp_65">65dp</dimen>
+    <dimen name="dp_47">47dp</dimen>
+    <dimen name="dp_40">40dp</dimen>
+    <dimen name="dp_11">11dp</dimen>
 </resources>

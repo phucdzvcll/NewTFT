@@ -42,7 +42,9 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
     }
 
     override fun onBindViewHolder(holder: ShowChampViewHolder, position: Int) {
-        holder.bind(ViewBinderModel(champ = listChamps[position].champ, championLiveData))
+        holder.bind(ViewBinderModel(champ = listChamps[position].champ,
+            itemClickLiveData = championLiveData
+        ))
     }
 
     override fun getItemCount() = listChamps.size.defaultZero()

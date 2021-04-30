@@ -10,8 +10,11 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_android.BaseFragment
+import com.free.common_android.navigation.NavigateAction
+import com.free.common_android.navigation.NavigateViewModel
 import com.free.domain.entities.ChampsEntity
 import com.free.newtft.databinding.FragmentShowBinding
+import com.free.newtft.features.details.DetailActivity
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ShowFragment : BaseFragment() {
@@ -33,7 +36,7 @@ class ShowFragment : BaseFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         adapterShowChamps.championLiveData.observe(viewLifecycleOwner, { champ ->
-            Toast.makeText(activity, champ.name, Toast.LENGTH_SHORT).show()
+            navigateTo(ShowChampNavigateToAction(champ.id, DetailActivity.ItemType.CHAMP))
         })
         fragmentShowBinding.rcvShowChamp.adapter = adapterShowChamps
     }
@@ -55,4 +58,9 @@ class ShowFragment : BaseFragment() {
             return ShowFragment()
         }
     }
+
+    data class ShowChampNavigateToAction(
+        val id: String,
+        val itemType: DetailActivity.ItemType
+    ) : NavigateAction.ToAction()
 }
