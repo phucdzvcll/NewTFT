@@ -10,6 +10,7 @@ import com.drakeet.multitype.MultiTypeAdapter
 import com.free.common_android.BaseFragment
 import com.free.newtft.databinding.FragmentChampDetailBinding
 import com.free.newtft.features.details.champ_detail.viewbinder.HeaderChampDetailViewBinder
+import com.free.newtft.features.details.champ_detail.viewbinder.TraitsDetailViewBinder
 import com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
@@ -48,8 +49,15 @@ class ChampDetailFragment : BaseFragment() {
             navigateBack()
         }
 
+        setUpRecyclerview()
+    }
+
+    private fun setUpRecyclerview() {
         val headerChampDetailViewBinder = HeaderChampDetailViewBinder()
         detailAdapter.register(headerChampDetailViewBinder)
+
+        val traitsDetailViewBinder = TraitsDetailViewBinder()
+        detailAdapter.register(traitsDetailViewBinder)
 
         detailFragmentBinding.detailRecyclerView.adapter = detailAdapter
     }
@@ -82,10 +90,18 @@ class ChampDetailFragment : BaseFragment() {
             recyclerView: RecyclerView,
             champDetailModel: ChampDetailViewModel.DetailChampModel
         ) {
-            val mapper = HeaderChampDetailViewBinder.HeaderModelMapper()
-            val item = mapper.map(champDetailModel)
+            val items = mutableListOf<Any>()
+
+            val mapperModelMapper = HeaderChampDetailViewBinder.HeaderModelMapper()
+            val headerItem = mapperModelMapper.map(champDetailModel)
+            items.add(headerItem)
+
+            val traitDetailMapper = TraitsDetailViewBinder.TraitDetailMapper()
+            val traits = traitDetailMapper.mapList(champDetailModel.traits)
+            items.addAll(traits)
+
             recyclerView.adapter?.notifyDataSetChanged()
-            (recyclerView.adapter as MultiTypeAdapter).items = listOf(item)
+            (recyclerView.adapter as MultiTypeAdapter).items = items
         }
     }
 }

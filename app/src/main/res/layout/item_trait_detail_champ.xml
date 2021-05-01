@@ -1,0 +1,224 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <import type="android.view.View" />
+
+        <variable
+            name="traitDetailModel"
+            type="com.free.newtft.features.details.champ_detail.viewbinder.TraitsDetailViewBinder.TraitDetailModel" />
+    </data>
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        app:cardBackgroundColor="@color/backgroundCardView"
+        app:cardCornerRadius="@dimen/dp_10">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/traitName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingStart="@dimen/dp_20"
+                android:paddingEnd="@dimen/dp_20"
+                android:text="@{traitDetailModel.name}"
+                android:textColor="@color/white"
+                android:textSize="18sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="trait name" />
+
+            <ImageView
+                android:contentDescription="@string/no_image"
+                android:id="@+id/imageView2"
+                loadImage="@{traitDetailModel.imgUrl}"
+                android:layout_width="@dimen/dp_35"
+                android:layout_height="@dimen/dp_35"
+                android:layout_margin="@dimen/dp_5"
+                app:layout_constraintBottom_toTopOf="@+id/champOfTraitRecyclerView"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/traitName"
+                tools:src="@tools:sample/avatars" />
+
+            <TextView
+                android:id="@+id/innateTrait"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingStart="@dimen/dp_5"
+                android:paddingEnd="@dimen/dp_5"
+                android:text="@{traitDetailModel.innate}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                android:visibility="@{traitDetailModel.isVisibleInnate() ? View.VISIBLE : View.GONE, default = visible }"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/traitName"
+                tools:text="At the start of combat, Assassins leap to the enemy backline." />
+
+            <TextView
+                android:id="@+id/descriptionTrait"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dp_10"
+                android:layout_marginTop="@dimen/dp_10"
+                android:paddingStart="@dimen/dp_5"
+                android:paddingEnd="@dimen/dp_5"
+                android:text="@{traitDetailModel.description}"
+                android:textColor="@color/white"
+                android:textSize="12sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/innateTrait"
+                tools:text="Assassin's Abilities can critically strike and they gain bonus Critical Strike Chance and bonus Critical Strike Damage." />
+
+            <LinearLayout
+                android:id="@+id/linearLayout"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintTop_toBottomOf="@+id/descriptionTrait">
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_10"
+                    android:orientation="horizontal"
+                    android:visibility="@{traitDetailModel.listSets[0].isVisible ? View.VISIBLE: View.GONE, default = visible}">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:background="@drawable/circle_background"
+                        android:gravity="center"
+                        android:text="@{traitDetailModel.listSets[0].min}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        tools:text="2" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:text="@{traitDetailModel.listSets[0].active}"
+                        android:textColor="@color/white"
+                        tools:text="25% Attack Speed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:orientation="horizontal"
+                    android:visibility="@{traitDetailModel.listSets[1].isVisible ? View.VISIBLE: View.GONE, default = visible}">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:background="@drawable/circle_background"
+                        android:gravity="center"
+                        android:text="@{traitDetailModel.listSets[1].min}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        tools:text="4" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:text="@{traitDetailModel.listSets[1].active}"
+                        android:textColor="@color/white"
+                        tools:text="60% Attack Speed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:orientation="horizontal"
+                    android:visibility="@{traitDetailModel.listSets[2].isVisible ? View.VISIBLE: View.GONE, default = visible}">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:background="@drawable/circle_background"
+                        android:gravity="center"
+                        android:text="@{traitDetailModel.listSets[2].min}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        tools:text="6" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:text="@{traitDetailModel.listSets[2].active}"
+                        android:textColor="@color/white"
+                        tools:text="160% Attack Speed" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dp_5"
+                    android:orientation="horizontal"
+                    android:visibility="@{traitDetailModel.listSets[3].isVisible ? View.VISIBLE: View.GONE, default = visible}">
+
+                    <TextView
+                        android:layout_width="@dimen/dp_20"
+                        android:layout_height="@dimen/dp_20"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_20"
+                        android:background="@drawable/circle_background"
+                        android:gravity="center"
+                        android:text="@{traitDetailModel.listSets[3].min}"
+                        android:textAlignment="center"
+                        android:textColor="@color/white"
+                        tools:text="8" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="@dimen/dp_10"
+                        android:text="@{traitDetailModel.listSets[3].active}"
+                        android:textColor="@color/white"
+                        tools:text="250% Attack Speed" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/champOfTraitRecyclerView"
+                loadChampion="@{traitDetailModel.listChamps}"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dp_10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
+</layout>
