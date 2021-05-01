@@ -5,6 +5,7 @@ import com.free.common_android.BaseActivity
 import com.free.common_android.navigation.NavigateAction
 import com.free.common_android.replaceFragment
 import com.free.newtft.features.details.DetailActivity
+import com.free.newtft.features.main.recommend_teams.RecommendFragment
 import com.free.newtft.features.main.show_champ.ShowFragment
 import com.free.newtft.view.MainFragment
 
@@ -20,6 +21,10 @@ class MainActivity : BaseActivity() {
         super.onNavigateTo(action)
         when (action) {
             is ShowFragment.ShowChampNavigateToAction -> openDetailActivity(
+                action.id,
+                action.itemType
+            )
+            is RecommendFragment.TeamRecommendAction -> openDetailActivity(
                 action.id,
                 action.itemType
             )

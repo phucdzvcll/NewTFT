@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.recommend_teams
+package com.free.newtft.features.main.recommend_teams.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -19,8 +19,10 @@ class TeamsRecommendViewModel(
 
     val teamsRecommendEntity: MutableLiveData<List<TeamsRecommendEntity>> = MutableLiveData()
     var jobTeamsRecommend: Job? = null
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getListTeamsRecommend() {
+        isLoading.value = true
         teamsRecommendEntity.value = listOf()
         jobTeamsRecommend?.cancel()
         jobTeamsRecommend = viewModelScope.launch(appDispatchers.main) {
@@ -29,8 +31,9 @@ class TeamsRecommendViewModel(
             }
             itemResult.either({
                 Log.d("suu", "failure")
-            }, { resuld ->
-                teamsRecommendEntity.value = resuld
+            }, { result ->
+                teamsRecommendEntity.value = result
+                isLoading.value = false
             })
         }
     }

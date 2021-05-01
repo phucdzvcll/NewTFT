@@ -20,10 +20,11 @@ class ChampDetailViewModel(
 
     private var detailChampModel = createDetailChampModel()
     val champDetailLiveData: MutableLiveData<DetailChampModel> = MutableLiveData()
-
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     var champDetailJob: Job? = null
     fun getChampDetail(id: String) {
         updateData(detailChampModel)
+        isLoading.value = true
         champDetailJob?.cancel()
         champDetailJob = viewModelScope.launch(appDispatchers.main) {
             val result = withContext(appDispatchers.main) {
@@ -58,6 +59,7 @@ class ChampDetailViewModel(
                 Log.d("x", "hehe")
             }, {
                 updateData(detailChampModel.copy(traits = it))
+                isLoading.value = false
             })
         }
     }
