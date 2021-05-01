@@ -4,8 +4,9 @@ import android.app.Application
 import com.free.common_android.di.createCommonModule
 import com.free.data.di.createRemoteModule
 import com.free.domain.di.createDomainModule
-import com.free.newtft.features.recommend_teams.di.teamsRecommendModule
-import com.free.newtft.features.show_champ.di.showChampModule
+import com.free.newtft.features.details.champ_detail.di.champDetailModule
+import com.free.newtft.features.main.recommend_teams.di.teamsRecommendModule
+import com.free.newtft.features.main.show_champ.di.showChampModule
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
@@ -15,7 +16,7 @@ class MyApplication : Application() {
         startKoin {
             androidContext(this@MyApplication)
             modules(createCommonModule, createRemoteModule, createDomainModule, showChampModule,
-                teamsRecommendModule)
+                teamsRecommendModule, champDetailModule)
         }
     }
 }

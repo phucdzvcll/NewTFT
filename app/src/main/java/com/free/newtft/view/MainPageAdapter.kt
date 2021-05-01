@@ -3,12 +3,12 @@ package com.free.newtft.view
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.free.newtft.features.BuildFragment
-import com.free.newtft.features.LoginFragment
-import com.free.newtft.features.recommend_teams.RecommendFragment
-import com.free.newtft.features.show_champ.ShowFragment
+import com.free.newtft.features.main.BuildFragment
+import com.free.newtft.features.main.LoginFragment
+import com.free.newtft.features.main.recommend_teams.RecommendFragment
+import com.free.newtft.features.main.show_champ.ShowFragment
 
-class MainPageAdapter(private val fragmentManager: FragmentManager) : FragmentPagerAdapter(
+class MainPageAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
     fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT
 ) {
     private val itemPages = mutableListOf<ItemPage>()

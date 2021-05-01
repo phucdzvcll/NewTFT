@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".features.details.champ_detail.view.ChampDetailFragment">
+    <data>
+        <variable
+            name="detailChampViewModel"
+            type="com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel" />
+    </data>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dp_47"
+            android:background="@color/backgroundTabLayout">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/imgDetailBack"
+                android:layout_width="@dimen/dp_40"
+                android:layout_height="@dimen/dp_40"
+                android:layout_alignParentStart="true"
+                android:layout_centerVertical="true"
+                android:background="?selectableItemBackground"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@drawable/ic_back_red" />
+
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_toEndOf="@id/imgDetailBack"
+                android:gravity="center"
+                android:text="@{detailChampViewModel.champDetailLiveData.name}"
+                android:textColor="@color/color_white"
+                app:layout_constraintBottom_toBottomOf="@+id/imgDetailBack"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@+id/imgDetailBack"
+                app:layout_constraintTop_toTopOf="@+id/imgDetailBack"
+                tools:text="@string/champ_title" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            items="@{detailChampViewModel.champDetailLiveData}"
+            android:id="@+id/detailRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+            android:background="@color/backgroundColor" />
+    </LinearLayout>
+
+
+</layout>

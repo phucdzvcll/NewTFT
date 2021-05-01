@@ -9,7 +9,7 @@
 
         <variable
             name="champ"
-            type="com.free.newtft.features.recommend_teams.AdapterChampsRecommend.Champion" />
+            type="com.free.newtft.features.main.recommend_teams.AdapterChampsRecommend.Champion" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -64,6 +64,7 @@
                 loadImage="@{champ.items[0].imgUrl}"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
+                android:contentDescription="@string/no_image"
                 android:background="@drawable/border_item"
                 android:visibility="@{champ.items[0].isVisible ? View.VISIBLE : View.GONE, default=visible }"
                 tools:src="@tools:sample/avatars" />
@@ -75,6 +76,7 @@
                 android:layout_height="@dimen/dp_20"
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginEnd="@dimen/dp_4"
+                android:contentDescription="@string/no_image"
                 android:background="@drawable/border_item"
                 android:visibility="@{champ.items[1].isVisible ? View.VISIBLE : View.GONE, default=visible }"
                 tools:src="@tools:sample/avatars" />
@@ -84,6 +86,7 @@
                 loadImage="@{champ.items[2].imgUrl}"
                 android:layout_width="@dimen/dp_20"
                 android:layout_height="@dimen/dp_20"
+                android:contentDescription="@string/no_image"
                 android:background="@drawable/border_item"
                 android:visibility="@{champ.items[2].isVisible ? View.VISIBLE : View.GONE, default=visible }"
                 tools:src="@tools:sample/avatars" />

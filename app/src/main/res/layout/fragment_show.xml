@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android">
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="showChampsViewModel"
-            type="com.free.newtft.features.show_champ.ShowChampsViewModel" />
+            type="com.free.newtft.features.main.show_champ.ShowChampsViewModel" />
     </data>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvChamp"
+        android:id="@+id/rcvShowChamp"
         android:background="@color/backgroundColor"
         android:textAlignment="center"
         data="@{showChampsViewModel.champsListChampsLiveData}"
         android:layout_width="match_parent"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="4"
         android:layout_height="wrap_content" />
 
 </layout>
