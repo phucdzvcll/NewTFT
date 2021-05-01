@@ -1,5 +1,6 @@
 package com.free.newtft.features.main.recommend_teams.di
 
+import com.free.newtft.features.main.recommend_teams.viewmodel.ChampDialogShareViewModel
 import com.free.newtft.features.main.recommend_teams.viewmodel.TeamsRecommendViewModel
 import com.free.newtft.features.main.recommend_teams.viewmodel.ChampDialogViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -19,4 +20,6 @@ val teamsRecommendModule = module {
             getChampDialogUseCase = get()
         )
     }
+
+    viewModel { ChampDialogShareViewModel() }
 }
