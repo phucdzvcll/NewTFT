@@ -55,16 +55,16 @@ class MainFragment : BaseFragment() {
         )
         tabs.add(
             MainPageAdapter.ItemPage(
-                title = "Dựng Đội Hình",
-                iconResId = R.drawable.selector_icon_tab_build,
-                itemType = MainPageAdapter.ItemType.Build
+                title = "Trang Bị",
+                iconResId = R.drawable.selector_icon_tab_weapon,
+                itemType = MainPageAdapter.ItemType.Login
             )
         )
         tabs.add(
             MainPageAdapter.ItemPage(
-                title = "Đăng Nhập",
-                iconResId = R.drawable.selector_icon_tab_login,
-                itemType = MainPageAdapter.ItemType.Login
+                title = "Đội Hình",
+                iconResId = R.drawable.selector_icon_tab_build,
+                itemType = MainPageAdapter.ItemType.Build
             )
         )
 

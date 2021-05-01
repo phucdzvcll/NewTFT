@@ -4,7 +4,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.free.newtft.features.main.BuildFragment
-import com.free.newtft.features.main.LoginFragment
+import com.free.newtft.features.main.WeaponFragment
 import com.free.newtft.features.main.recommend_teams.RecommendFragment
 import com.free.newtft.features.main.show_champ.ShowFragment
 
@@ -25,7 +25,7 @@ class MainPageAdapter(fragmentManager: FragmentManager) : FragmentPagerAdapter(
             ItemType.Show -> ShowFragment.newInstant()
             ItemType.Recommend -> RecommendFragment.newInstant()
             ItemType.Build -> BuildFragment.newInstant()
-            ItemType.Login -> LoginFragment.newInstant()
+            ItemType.Login -> WeaponFragment.newInstant()
         }
     }
 
