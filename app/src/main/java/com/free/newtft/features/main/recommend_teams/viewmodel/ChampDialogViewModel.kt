@@ -17,8 +17,10 @@ class ChampDialogViewModel(
 ) : BaseViewModel() {
     val champDialogLiveLiveData = MutableLiveData<ChampDialogEntity>()
     var job: Job? = null
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getChampDialog(id: String) {
+        isLoading.value = true
         champDialogLiveLiveData.value = ChampDialogEntity(
             name = "",
             cost = 0,
@@ -41,6 +43,7 @@ class ChampDialogViewModel(
 
             }, {
                 champDialogLiveLiveData.value = it
+                isLoading.value = false
             })
         }
     }

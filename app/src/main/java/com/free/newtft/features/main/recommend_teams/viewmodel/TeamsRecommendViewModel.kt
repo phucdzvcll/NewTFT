@@ -19,8 +19,10 @@ class TeamsRecommendViewModel(
 
     val teamsRecommendEntity: MutableLiveData<List<TeamsRecommendEntity>> = MutableLiveData()
     var jobTeamsRecommend: Job? = null
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
 
     fun getListTeamsRecommend() {
+        isLoading.value = true
         teamsRecommendEntity.value = listOf()
         jobTeamsRecommend?.cancel()
         jobTeamsRecommend = viewModelScope.launch(appDispatchers.main) {
@@ -31,6 +33,7 @@ class TeamsRecommendViewModel(
                 Log.d("suu", "failure")
             }, { result ->
                 teamsRecommendEntity.value = result
+                isLoading.value = false
             })
         }
     }

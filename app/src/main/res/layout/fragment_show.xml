@@ -4,19 +4,41 @@
 
     <data>
 
+        <import type="android.view.View" />
+
         <variable
             name="showChampsViewModel"
             type="com.free.newtft.features.main.show_champ.ShowChampsViewModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/rcvShowChamp"
-        android:background="@color/backgroundColor"
-        android:textAlignment="center"
-        data="@{showChampsViewModel.champsListChampsLiveData}"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:spanCount="4"
-        android:layout_height="wrap_content" />
+        android:layout_height="match_parent"
+        android:background="@color/backgroundColor">
+
+        <ProgressBar
+            android:id="@+id/isLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{showChampsViewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rcvShowChamp"
+            data="@{showChampsViewModel.champsListChampsLiveData}"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:textAlignment="center"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:spanCount="4" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </layout>

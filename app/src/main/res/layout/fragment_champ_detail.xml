@@ -3,20 +3,28 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     tools:context=".features.details.champ_detail.view.ChampDetailFragment">
+
     <data>
+
+        <import type="android.view.View" />
+
         <variable
             name="detailChampViewModel"
             type="com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel" />
     </data>
-    <LinearLayout
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:orientation="vertical"
         android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dp_47"
-            android:background="@color/backgroundTabLayout">
+            android:background="@color/backgroundTabLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/imgDetailBack"
@@ -46,13 +54,28 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <androidx.recyclerview.widget.RecyclerView
-            items="@{detailChampViewModel.champDetailLiveData}"
             android:id="@+id/detailRecyclerView"
+            items="@{detailChampViewModel.champDetailLiveData}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
+            android:background="@color/backgroundColor"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-            android:background="@color/backgroundColor" />
-    </LinearLayout>
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
+
+        <ProgressBar
+            android:id="@+id/isLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{detailChampViewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/detailRecyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/detailRecyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </layout>

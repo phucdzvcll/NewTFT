@@ -20,8 +20,9 @@ class ShowChampsViewModel(
 ) : BaseViewModel() {
     var jobListChamps: Job? = null
     val champsListChampsLiveData: MutableLiveData<List<ChampsEntity>> = MutableLiveData()
-
+    val isLoading: MutableLiveData<Boolean> = MutableLiveData()
     fun getListChamps() {
+        isLoading.value = true
         champsListChampsLiveData.value = listOf()
         jobListChamps?.cancel()
         jobListChamps = viewModelScope.launch(appDispatchers.main) {
@@ -32,6 +33,7 @@ class ShowChampsViewModel(
             itemResult.either({ failure ->
                 Log.d("errorNe", failure.toString())
             }, { result ->
+                isLoading.value = false
                 champsListChampsLiveData.value = result
             })
         }

@@ -1,17 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+
+        <import type="android.view.View" />
 
         <variable
             name="teamsRecommendViewModel"
             type="com.free.newtft.features.main.recommend_teams.viewmodel.TeamsRecommendViewModel" />
     </data>
 
-    <androidx.recyclerview.widget.RecyclerView xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/recyclerView"
-        loadData="@{teamsRecommendViewModel.teamsRecommendEntity}"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/backgroundColor" />
+        android:layout_height="match_parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerView"
+            loadData="@{teamsRecommendViewModel.teamsRecommendEntity}"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@color/backgroundColor"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ProgressBar
+            android:id="@+id/isLoading"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:indeterminate="true"
+            android:visibility="@{teamsRecommendViewModel.isLoading ? View.VISIBLE : View.GONE}"
+            app:layout_constraintBottom_toBottomOf="@+id/recyclerView"
+            app:layout_constraintEnd_toEndOf="@+id/recyclerView"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
