@@ -3,6 +3,8 @@ package com.free.newtft.features.details.champ_detail.viewbinder
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.ItemViewBinder
@@ -14,36 +16,43 @@ import com.free.newtft.databinding.ItemChampOfTraitDetailBinding
 import com.free.newtft.databinding.ItemTraitDetailChampBinding
 import java.util.*
 
-class TraitsDetailViewBinder :
+class TraitsDetailViewBinder(val lifecycle: LifecycleOwner) :
     ItemViewBinder<TraitsDetailViewBinder.TraitDetailModel, TraitsDetailViewBinder.TraitsDetailViewHolder>() {
 
-    class TraitsDetailViewHolder(private val binding: ItemTraitDetailChampBinding) :
+    val itemClickLiveData: MutableLiveData<TraitDetailModel.Champion> = MutableLiveData()
+
+    class TraitsDetailViewHolder(val binding: ItemTraitDetailChampBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(model: TraitDetailModel) {
             binding.traitDetailModel = model
-            val adapter = ChampAdapter()
-            binding.champOfTraitRecyclerView.layoutManager =
-                GridLayoutManager(binding.champOfTraitRecyclerView.context, 7)
-            binding.champOfTraitRecyclerView.adapter = adapter
         }
+
     }
 
 
     override fun onBindViewHolder(holder: TraitsDetailViewHolder, item: TraitDetailModel) {
         holder.bind(item)
+
+
     }
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup
     ): TraitsDetailViewHolder {
-        return TraitsDetailViewHolder(
-            ItemTraitDetailChampBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val itemBinding = ItemTraitDetailChampBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        val adapter = ChampAdapter()
+        adapter.itemClickLiveData.observe(lifecycle, {
+            itemClickLiveData.value = it
+        })
+        itemBinding.champOfTraitRecyclerView.layoutManager =
+            GridLayoutManager(itemBinding.champOfTraitRecyclerView.context, 7)
+        itemBinding.champOfTraitRecyclerView.adapter = adapter
+        return TraitsDetailViewHolder(itemBinding)
     }
 
     class TraitDetailMapper : Mapper<TraitDetailEntity, TraitDetailModel>() {
@@ -144,13 +153,15 @@ class TraitsDetailViewBinder :
 
     class ChampAdapter : RecyclerView.Adapter<ChampAdapter.ChampViewHolder>() {
 
-        private val listChamps = mutableListOf<TraitDetailModel.Champion>()
+        val itemClickLiveData = MutableLiveData<TraitDetailModel.Champion>()
+
+        private val listChamps = mutableListOf<ViewBinderModel>()
 
         class ChampViewHolder(private val binding: ItemChampOfTraitDetailBinding) :
             RecyclerView.ViewHolder(binding.root) {
-            fun bind(champ: TraitDetailModel.Champion) {
-                binding.champModel = champ
-                when (champ.cost) {
+            fun bind(viewBinderModel: ViewBinderModel) {
+                binding.viewBinderModel = viewBinderModel
+                when (viewBinderModel.champ.cost) {
                     1 -> binding.imgChamp.setBackgroundResource(R.drawable.border_gray)
                     2 -> binding.imgChamp.setBackgroundResource(R.drawable.border_green)
                     3 -> binding.imgChamp.setBackgroundResource(R.drawable.border_blue)
@@ -178,8 +189,30 @@ class TraitsDetailViewBinder :
 
         fun addData(list: List<TraitDetailModel.Champion>) {
             listChamps.clear()
-            listChamps.addAll(list)
+            listChamps.addAll(map(list))
             notifyDataSetChanged()
+        }
+
+        private fun map(list: List<TraitDetailModel.Champion>): List<ViewBinderModel> {
+            val listViewBinderModel = mutableListOf<ViewBinderModel>()
+            list.forEach {
+                listViewBinderModel.add(
+                    ViewBinderModel(
+                        champ = it,
+                        itemClickLiveData = itemClickLiveData
+                    )
+                )
+            }
+            return listViewBinderModel
+        }
+
+        data class ViewBinderModel(
+            val champ: TraitDetailModel.Champion,
+            val itemClickLiveData: MutableLiveData<TraitDetailModel.Champion>
+        ) {
+            fun onClick() {
+                itemClickLiveData.value = champ
+            }
         }
     }
 }

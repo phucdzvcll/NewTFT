@@ -5,9 +5,11 @@ import android.content.Intent
 import android.os.Bundle
 import android.widget.Toast
 import com.free.common_android.BaseActivity
+import com.free.common_android.navigation.NavigateAction
 import com.free.common_android.replaceFragment
 import com.free.newtft.R
 import com.free.newtft.features.details.champ_detail.view.ChampDetailFragment
+import com.free.newtft.features.main.show_champ.ShowFragment
 
 class DetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,6 +26,20 @@ class DetailActivity : BaseActivity() {
                 }
             }
         }
+    }
+
+    override fun onNavigateTo(action: NavigateAction.ToAction) {
+        super.onNavigateTo(action)
+        when (action) {
+            is ChampDetailFragment.ChampOfTraitDetailAction -> openDetailActivity(
+                action.id,
+                action.itemType
+            )
+        }
+    }
+
+    private fun openDetailActivity(id: String, itemType: ItemType) {
+        startActivity(newIntent(this, id, itemType))
     }
 
     companion object {

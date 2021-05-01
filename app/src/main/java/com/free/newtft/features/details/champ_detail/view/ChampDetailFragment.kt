@@ -8,7 +8,9 @@ import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.MultiTypeAdapter
 import com.free.common_android.BaseFragment
+import com.free.common_android.navigation.NavigateAction
 import com.free.newtft.databinding.FragmentChampDetailBinding
+import com.free.newtft.features.details.DetailActivity
 import com.free.newtft.features.details.champ_detail.viewbinder.HeaderChampDetailViewBinder
 import com.free.newtft.features.details.champ_detail.viewbinder.TraitsDetailViewBinder
 import com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel
@@ -56,11 +58,19 @@ class ChampDetailFragment : BaseFragment() {
         val headerChampDetailViewBinder = HeaderChampDetailViewBinder()
         detailAdapter.register(headerChampDetailViewBinder)
 
-        val traitsDetailViewBinder = TraitsDetailViewBinder()
+        val traitsDetailViewBinder = TraitsDetailViewBinder(this)
+        traitsDetailViewBinder.itemClickLiveData.observe(viewLifecycleOwner, {
+            navigateTo(ChampOfTraitDetailAction(it.id, DetailActivity.ItemType.CHAMP))
+        })
         detailAdapter.register(traitsDetailViewBinder)
 
         detailFragmentBinding.detailRecyclerView.adapter = detailAdapter
     }
+
+    data class ChampOfTraitDetailAction(
+        val id: String,
+        val itemType: DetailActivity.ItemType
+    ) : NavigateAction.ToAction()
 
     companion object {
         private const val ID_EXTRA = "id"
