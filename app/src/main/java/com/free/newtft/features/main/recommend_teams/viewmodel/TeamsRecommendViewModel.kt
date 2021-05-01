@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.recommend_teams
+package com.free.newtft.features.main.recommend_teams.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData
@@ -29,8 +29,8 @@ class TeamsRecommendViewModel(
             }
             itemResult.either({
                 Log.d("suu", "failure")
-            }, { resuld ->
-                teamsRecommendEntity.value = resuld
+            }, { result ->
+                teamsRecommendEntity.value = result
             })
         }
     }
