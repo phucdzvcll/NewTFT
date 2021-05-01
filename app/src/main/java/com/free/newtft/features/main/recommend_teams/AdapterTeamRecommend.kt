@@ -5,6 +5,8 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.BindingAdapter
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
@@ -13,7 +15,10 @@ import com.free.newtft.databinding.ItemTeamRecommendBinding
 import java.util.Arrays.sort
 import java.util.Collections.sort
 
-class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecommendViewHolder>() {
+class AdapterTeamRecommend(val owner: LifecycleOwner) :
+    RecyclerView.Adapter<AdapterTeamRecommend.TeamRecommendViewHolder>() {
+
+    val itemClickLiveData = MutableLiveData<AdapterChampsRecommend.Champion>()
 
     private val listTeamsRecommend = mutableListOf<TeamsRecommend>()
 
@@ -26,13 +31,21 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TeamRecommendViewHolder {
-        return TeamRecommendViewHolder(
-            ItemTeamRecommendBinding.inflate(
-                LayoutInflater.from(parent.context),
-                parent,
-                false
-            )
+        val itemBinding = ItemTeamRecommendBinding.inflate(
+            LayoutInflater.from(parent.context),
+            parent,
+            false
         )
+        val adapterChampsRecommend = AdapterChampsRecommend()
+
+        adapterChampsRecommend.itemClickLiveData.observe(owner, {
+            itemClickLiveData.value = it
+        })
+
+        itemBinding.champRecyclerView.adapter = adapterChampsRecommend
+        itemBinding.champRecyclerView.layoutManager =
+            GridLayoutManager(itemBinding.champRecyclerView.context, 4)
+        return TeamRecommendViewHolder(itemBinding)
     }
 
     override fun onBindViewHolder(holder: TeamRecommendViewHolder, position: Int) {
@@ -106,10 +119,7 @@ class AdapterTeamRecommend : RecyclerView.Adapter<AdapterTeamRecommend.TeamRecom
             recyclerView: RecyclerView,
             teamsRecommend: TeamsRecommend
         ) {
-            val adapterChampsRecommend = AdapterChampsRecommend()
-            adapterChampsRecommend.addData(teamsRecommend)
-            recyclerView.layoutManager = GridLayoutManager(recyclerView.context, 4)
-            recyclerView.adapter = adapterChampsRecommend
+            (recyclerView.adapter as AdapterChampsRecommend).addData(teamsRecommend)
         }
 
         @BindingAdapter("dataTraits")

@@ -4,12 +4,15 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_android.BaseFragment
 import com.free.domain.entities.TeamsRecommendEntity
 import com.free.newtft.databinding.FragmentRecommendBinding
+import com.free.newtft.features.main.recommend_teams.champ_detail_dialog.ChampDetailDialogFragment
+import kotlinx.android.synthetic.main.dialog_detail_champ.*
 import org.koin.android.viewmodel.ext.android.viewModel
 
 
@@ -28,6 +31,22 @@ class RecommendFragment : BaseFragment() {
         return fragmentRecommendBinding.root
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+    }
+
+    private fun initView() {
+        val adapterTeamRecommend = AdapterTeamRecommend(this)
+        adapterTeamRecommend.itemClickLiveData.observe(viewLifecycleOwner, {
+            val dialog = ChampDetailDialogFragment.newInstant()
+            dialog.show(childFragmentManager, "ChampDetailDialogFragment")
+        })
+        fragmentRecommendBinding.recyclerView.layoutManager =
+            LinearLayoutManager(fragmentRecommendBinding.recyclerView.context)
+        fragmentRecommendBinding.recyclerView.adapter = adapterTeamRecommend
+    }
+
     object Biding {
         @BindingAdapter("loadData")
         @JvmStatic
@@ -35,10 +54,7 @@ class RecommendFragment : BaseFragment() {
             recyclerView: RecyclerView,
             teamsRecommendEntity: List<TeamsRecommendEntity>
         ) {
-            val adapterTeamRecommend = AdapterTeamRecommend()
-            adapterTeamRecommend.addData(teamsRecommendEntity)
-            recyclerView.layoutManager = LinearLayoutManager(recyclerView.context)
-            recyclerView.adapter = adapterTeamRecommend
+            (recyclerView.adapter as AdapterTeamRecommend).addData(teamsRecommendEntity)
         }
     }
 

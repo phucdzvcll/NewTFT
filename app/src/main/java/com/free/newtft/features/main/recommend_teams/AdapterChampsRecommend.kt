@@ -2,6 +2,7 @@ package com.free.newtft.features.main.recommend_teams
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.free.newtft.R
 import com.free.newtft.databinding.ItemChampRecommendBinding
@@ -9,13 +10,15 @@ import com.free.newtft.databinding.ItemChampRecommendBinding
 class AdapterChampsRecommend :
     RecyclerView.Adapter<AdapterChampsRecommend.ChampsRecommendViewHolder>() {
 
-    private val listChamp = mutableListOf<Champion>()
+    val itemClickLiveData = MutableLiveData<Champion>()
+
+    private val listChamp = mutableListOf<ViewBinderModel>()
 
     class ChampsRecommendViewHolder(private val binding: ItemChampRecommendBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        fun bind(champ: Champion) {
-            binding.champ = champ
-            when (champ.cost) {
+        fun bind(itemViewBinder: ViewBinderModel) {
+            binding.itemViewBinder = itemViewBinder
+            when (itemViewBinder.champ.cost) {
                 1 -> binding.imgChamp.setBackgroundResource(R.drawable.border_gray)
                 2 -> binding.imgChamp.setBackgroundResource(R.drawable.border_green)
                 3 -> binding.imgChamp.setBackgroundResource(R.drawable.border_blue)
@@ -47,17 +50,19 @@ class AdapterChampsRecommend :
         notifyDataSetChanged()
     }
 
-    private fun mapper(teamsRecommend: AdapterTeamRecommend.TeamsRecommend): MutableList<Champion> {
-        val list = mutableListOf<Champion>()
+    private fun mapper(teamsRecommend: AdapterTeamRecommend.TeamsRecommend): MutableList<ViewBinderModel> {
+        val list = mutableListOf<ViewBinderModel>()
         teamsRecommend.champions.forEach {
             list.add(
-                Champion(
-                    id = it.id,
-                    name = it.name,
-                    imgUrl = it.imgUrl,
-                    cost = it.cost,
-                    isThreeStars = it.isThreeStars,
-                    items = maItems(it.items)
+                ViewBinderModel(
+                    Champion(
+                        id = it.id,
+                        name = it.name,
+                        imgUrl = it.imgUrl,
+                        cost = it.cost,
+                        isThreeStars = it.isThreeStars,
+                        items = maItems(it.items)
+                    ), itemClickLiveData = itemClickLiveData
                 )
             )
         }
@@ -67,11 +72,13 @@ class AdapterChampsRecommend :
     private fun maItems(items: List<String>): List<Champion.Item> {
         val listItems = mutableListOf<Champion.Item>()
         items.forEach {
-            listItems.add(Champion.Item(
-                imgUrl = "https://rerollcdn.com/items/$it.png",
-                isVisible = (it!="")
+            listItems.add(
+                Champion.Item(
+                    imgUrl = "https://rerollcdn.com/items/$it.png",
+                    isVisible = (it != "")
 
-            ))
+                )
+            )
         }
         return listItems
     }
@@ -88,5 +95,14 @@ class AdapterChampsRecommend :
             val imgUrl: String,
             val isVisible: Boolean
         )
+    }
+
+    data class ViewBinderModel(
+        val champ: Champion,
+        val itemClickLiveData: MutableLiveData<Champion>
+    ) {
+        fun onClick() {
+            itemClickLiveData.value = champ
+        }
     }
 }
