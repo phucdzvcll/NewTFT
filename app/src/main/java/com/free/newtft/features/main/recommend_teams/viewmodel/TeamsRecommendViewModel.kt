@@ -7,7 +7,7 @@ import com.free.common_android.AppDispatchers
 import com.free.common_android.BaseViewModel
 import com.free.domain.entities.TeamsRecommendEntity
 import com.free.domain.usecases.base.UseCaseParams
-import com.free.domain.usecases.show_champ.GetListTeamsRecommendUseCase
+import com.free.domain.usecases.team_recommend.GetListTeamsRecommendUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

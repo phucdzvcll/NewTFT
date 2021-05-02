@@ -5,8 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.free.common_android.AppDispatchers
 import com.free.common_android.BaseViewModel
 import com.free.domain.entities.ChampDialogEntity
-import com.free.domain.usecases.show_champ.GetChampDetailUseCase
-import com.free.domain.usecases.show_champ.GetChampDialogUseCase
+import com.free.domain.usecases.champ_detail.GetChampDetailUseCase
+import com.free.domain.usecases.team_recommend.GetChampDialogUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

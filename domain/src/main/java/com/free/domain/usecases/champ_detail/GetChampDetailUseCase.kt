@@ -1,4 +1,4 @@
-package com.free.domain.usecases.show_champ
+package com.free.domain.usecases.champ_detail
 
 import com.free.common_jvm.exception.Failure
 import com.free.domain.entities.ChampDetailEntity
