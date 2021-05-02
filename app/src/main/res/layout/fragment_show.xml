@@ -8,7 +8,7 @@
 
         <variable
             name="showChampsViewModel"
-            type="com.free.newtft.features.main.show_champ.ShowChampsViewModel" />
+            type="com.free.newtft.features.main.show_champ.viewmodel.ShowChampsViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -36,6 +36,7 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginBottom="@dimen/dp_16"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:spanCount="4" />

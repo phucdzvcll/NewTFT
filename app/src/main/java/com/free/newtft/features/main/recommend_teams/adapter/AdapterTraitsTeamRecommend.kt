@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.recommend_teams
+package com.free.newtft.features.main.recommend_teams.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

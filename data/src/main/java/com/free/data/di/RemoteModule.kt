@@ -3,14 +3,8 @@ package com.free.data.di
 import com.free.data.*
 import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.*
-import com.free.data.repository.ChampDetailRepositoryImpl
-import com.free.data.repository.ChampDialogRepositoryImpl
-import com.free.data.repository.ChampsRepositoryImpl
-import com.free.data.repository.TeamsRecommendResponseImpl
-import com.free.domain.repositories.ChampDetailRepository
-import com.free.domain.repositories.ChampDialogRepository
-import com.free.domain.repositories.ChampsRepository
-import com.free.domain.repositories.TeamsRecommendRepository
+import com.free.data.repository.*
+import com.free.domain.repositories.*
 import okhttp3.OkHttpClient
 import org.koin.dsl.module
 import retrofit2.Retrofit
@@ -41,6 +35,7 @@ val createRemoteModule = module {
     factory { get<Retrofit>().create(TraitsOfTeamRecommendService::class.java) }
     factory { get<Retrofit>().create(ChampDetailApiService::class.java) }
     factory { get<Retrofit>().create(ChampDialogApiService::class.java) }
+    factory { get<Retrofit>().create(WeaponApiService::class.java) }
 
     factory { ChampsListMapper() }
     factory { TeamRecommendMapper() }
@@ -49,6 +44,7 @@ val createRemoteModule = module {
     factory { TraitsDetailMapper() }
     factory { ChampOfTraitDetailMapper() }
     factory { ChampDialogMapper() }
+    factory { WeaponMapper() }
 
     single<ChampsRepository> {
         ChampsRepositoryImpl(
@@ -83,6 +79,14 @@ val createRemoteModule = module {
             remoteExceptionInterceptor = get(),
             champDialogApiService = get(),
             champDialogMapper = get()
+        )
+    }
+
+    single<WeaponRepository> {
+        WeaponRepositoryImpl(
+            remoteExceptionInterceptor = get(),
+            weaponApiService = get(),
+            weaponMapper = get()
         )
     }
 }

@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.show_champ
+package com.free.newtft.features.main.show_champ.viewmodel
 
 import android.util.Log
 import androidx.lifecycle.MutableLiveData

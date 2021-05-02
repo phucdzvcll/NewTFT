@@ -41,30 +41,30 @@ class MainFragment : BaseFragment() {
         tabs.clear()
         tabs.add(
             MainPageAdapter.ItemPage(
-                title = "Tướng",
+                title = "Champions",
                 iconResId = R.drawable.selector_icon_tab_show,
                 itemType = MainPageAdapter.ItemType.Show
             )
         )
         tabs.add(
             MainPageAdapter.ItemPage(
-                title = "Gợi Ý",
+                title = "Recommend",
                 iconResId = R.drawable.selector_icon_tab_recommend,
                 itemType = MainPageAdapter.ItemType.Recommend
             )
         )
         tabs.add(
             MainPageAdapter.ItemPage(
-                title = "Dựng Đội Hình",
-                iconResId = R.drawable.selector_icon_tab_build,
-                itemType = MainPageAdapter.ItemType.Build
+                title = "Items",
+                iconResId = R.drawable.selector_icon_tab_weapon,
+                itemType = MainPageAdapter.ItemType.Login
             )
         )
         tabs.add(
             MainPageAdapter.ItemPage(
-                title = "Đăng Nhập",
-                iconResId = R.drawable.selector_icon_tab_login,
-                itemType = MainPageAdapter.ItemType.Login
+                title = "Team Builder",
+                iconResId = R.drawable.selector_icon_tab_build,
+                itemType = MainPageAdapter.ItemType.Build
             )
         )
 

@@ -9,7 +9,7 @@
 
         <variable
             name="itemViewBinder"
-            type="com.free.newtft.features.main.recommend_teams.AdapterChampsRecommend.ViewBinderModel" />
+            type="com.free.newtft.features.main.recommend_teams.adapter.AdapterChampsRecommend.ViewBinderModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout

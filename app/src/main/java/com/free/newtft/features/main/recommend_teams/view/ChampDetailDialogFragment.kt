@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.recommend_teams.champ_detail_dialog
+package com.free.newtft.features.main.recommend_teams.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

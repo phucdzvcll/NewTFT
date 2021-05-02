@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.show_champ
+package com.free.newtft.features.main.show_champ.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
@@ -42,9 +42,11 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
     }
 
     override fun onBindViewHolder(holder: ShowChampViewHolder, position: Int) {
-        holder.bind(ViewBinderModel(champ = listChamps[position].champ,
+        holder.bind(
+            ViewBinderModel(champ = listChamps[position].champ,
             itemClickLiveData = championLiveData
-        ))
+        )
+        )
     }
 
     override fun getItemCount() = listChamps.size.defaultZero()
