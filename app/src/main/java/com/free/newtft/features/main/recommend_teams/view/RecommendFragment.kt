@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.recommend_teams
+package com.free.newtft.features.main.recommend_teams.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -12,7 +12,7 @@ import com.free.common_android.navigation.NavigateAction
 import com.free.domain.entities.TeamsRecommendEntity
 import com.free.newtft.databinding.FragmentRecommendBinding
 import com.free.newtft.features.details.DetailActivity
-import com.free.newtft.features.main.recommend_teams.champ_detail_dialog.ChampDetailDialogFragment
+import com.free.newtft.features.main.recommend_teams.adapter.AdapterTeamRecommend
 import com.free.newtft.features.main.recommend_teams.viewmodel.ChampDialogShareViewModel
 import com.free.newtft.features.main.recommend_teams.viewmodel.TeamsRecommendViewModel
 import org.koin.android.viewmodel.ext.android.sharedViewModel

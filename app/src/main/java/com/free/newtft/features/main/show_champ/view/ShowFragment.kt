@@ -1,20 +1,18 @@
-package com.free.newtft.features.main.show_champ
+package com.free.newtft.features.main.show_champ.view
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.databinding.BindingAdapter
-import androidx.lifecycle.Observer
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_android.BaseFragment
 import com.free.common_android.navigation.NavigateAction
-import com.free.common_android.navigation.NavigateViewModel
 import com.free.domain.entities.ChampsEntity
 import com.free.newtft.databinding.FragmentShowBinding
 import com.free.newtft.features.details.DetailActivity
+import com.free.newtft.features.main.show_champ.adapter.AdapterShowChamps
+import com.free.newtft.features.main.show_champ.viewmodel.ShowChampsViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ShowFragment : BaseFragment() {

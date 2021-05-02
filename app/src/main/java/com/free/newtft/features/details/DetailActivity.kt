@@ -9,7 +9,6 @@ import com.free.common_android.navigation.NavigateAction
 import com.free.common_android.replaceFragment
 import com.free.newtft.R
 import com.free.newtft.features.details.champ_detail.view.ChampDetailFragment
-import com.free.newtft.features.main.show_champ.ShowFragment
 
 class DetailActivity : BaseActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

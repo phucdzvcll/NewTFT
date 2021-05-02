@@ -13,4 +13,6 @@ val createDomainModule = module {
     factory { GetTraitsDetailUseCase(champDetailRepository = get()) }
 
     factory { GetChampDialogUseCase(champDialogRepository = get()) }
+
+    factory { GetListWeaponUseCase(weaponRepository = get()) }
 }

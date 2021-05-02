@@ -1,4 +1,4 @@
-package com.free.newtft.features.main.recommend_teams
+package com.free.newtft.features.main.recommend_teams.adapter
 
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -12,8 +12,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
 import com.free.domain.entities.TeamsRecommendEntity
 import com.free.newtft.databinding.ItemTeamRecommendBinding
-import java.util.Arrays.sort
-import java.util.Collections.sort
 
 class AdapterTeamRecommend(val owner: LifecycleOwner) :
     RecyclerView.Adapter<AdapterTeamRecommend.TeamRecommendViewHolder>() {
