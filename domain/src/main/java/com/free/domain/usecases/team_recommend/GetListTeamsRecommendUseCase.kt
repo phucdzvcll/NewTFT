@@ -1,4 +1,4 @@
-package com.free.domain.usecases.show_champ
+package com.free.domain.usecases.team_recommend
 
 import com.free.common_jvm.exception.Failure
 import com.free.domain.entities.TeamsRecommendEntity

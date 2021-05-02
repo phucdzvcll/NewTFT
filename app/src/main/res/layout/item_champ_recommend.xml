@@ -17,7 +17,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:gravity="center"
-        android:onClick="@{()->itemViewBinder.onClick()}"
         app:layout_constraintEnd_toEndOf="@+id/item1"
         app:layout_constraintStart_toEndOf="@+id/item1">
 
@@ -30,6 +29,7 @@
             android:layout_marginTop="@dimen/dp_8"
             android:layout_marginBottom="@dimen/dp_8"
             android:contentDescription="@string/no_image"
+            android:onClick="@{()->itemViewBinder.onClick()}"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"

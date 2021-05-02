@@ -13,7 +13,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:onClick="@{()->viewBinderModel.onClick()}"
         android:orientation="vertical">
 
         <ImageView
@@ -24,6 +23,7 @@
             android:layout_gravity="center"
             android:layout_margin="@dimen/dp_4"
             android:contentDescription="@string/no_image"
+            android:onClick="@{()->viewBinderModel.onClick()}"
             tools:src="@tools:sample/avatars" />
     </LinearLayout>
 

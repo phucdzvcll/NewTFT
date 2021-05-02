@@ -7,12 +7,11 @@ import com.free.common_android.AppDispatchers
 import com.free.common_android.BaseViewModel
 import com.free.domain.entities.ChampDetailEntity
 import com.free.domain.entities.TraitDetailEntity
-import com.free.domain.usecases.show_champ.GetChampDetailUseCase
-import com.free.domain.usecases.show_champ.GetTraitsDetailUseCase
+import com.free.domain.usecases.champ_detail.GetChampDetailUseCase
+import com.free.domain.usecases.champ_detail.GetTraitsDetailUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.*
 
 class ChampDetailViewModel(
     private val appDispatchers: AppDispatchers,

@@ -10,6 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.free.common_android.BaseFragment
 import com.free.domain.entities.WeaponEntity
 import com.free.newtft.databinding.FragmentWaponBinding
+import com.free.newtft.features.dialog_item.view.DialogItemDetailFragment
 import com.free.newtft.features.main.weapon.adapter.WeaponAdapter
 import com.free.newtft.features.main.weapon.viewmodel.WeaponViewModel
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -39,6 +40,10 @@ class WeaponFragment : BaseFragment() {
 
     private fun initView() {
         val adapter = WeaponAdapter()
+        adapter.itemClickLiveData.observe(viewLifecycleOwner, {
+            val dialog = DialogItemDetailFragment.newInstant(it.name)
+            dialog.show(childFragmentManager,"DialogItemDetailFragment")
+        })
         binding.recyclerviewWeapon.layoutManager =
             GridLayoutManager(binding.recyclerviewWeapon.context, 3)
         binding.recyclerviewWeapon.adapter = adapter

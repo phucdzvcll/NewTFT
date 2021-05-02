@@ -2,6 +2,7 @@ package com.free.newtft.features.details.champ_detail.viewbinder
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.ItemViewBinder
 import com.free.common_jvm.mapper.Mapper
@@ -10,9 +11,11 @@ import com.free.newtft.R
 import com.free.newtft.databinding.ItemHeaderDetailChampBinding
 import com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel
 
-class HeaderChampDetailViewBinder :
+class HeaderChampDetailViewBinder(private val itemClick: ItemCLick) :
     ItemViewBinder<HeaderChampDetailViewBinder.HeaderModel, HeaderChampDetailViewBinder.HeaderChampDetailHolder>() {
-    class HeaderChampDetailHolder(private val binding: ItemHeaderDetailChampBinding) :
+    val itemClickLiveData = MutableLiveData<HeaderModel>()
+
+    class HeaderChampDetailHolder(val binding: ItemHeaderDetailChampBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind(headerModel: HeaderModel) {
             binding.header = headerModel
@@ -40,19 +43,28 @@ class HeaderChampDetailViewBinder :
 
     override fun onBindViewHolder(holder: HeaderChampDetailHolder, item: HeaderModel) {
         holder.bind(headerModel = item)
+
+        holder.binding.item1.setOnClickListener {
+            itemClick.onLick(item.items[0].name)
+        }
+        holder.binding.item2.setOnClickListener {
+            itemClick.onLick(item.items[1].name)
+        }
+        holder.binding.item3.setOnClickListener {
+            itemClick.onLick(item.items[2].name)
+        }
     }
 
     override fun onCreateViewHolder(
         inflater: LayoutInflater,
         parent: ViewGroup
     ): HeaderChampDetailHolder {
-        return HeaderChampDetailHolder(
-            ItemHeaderDetailChampBinding.inflate(
-                LayoutInflater.from(
-                    parent.context
-                ), parent, false
-            )
+        val itemBinding = ItemHeaderDetailChampBinding.inflate(
+            LayoutInflater.from(
+                parent.context
+            ), parent, false
         )
+        return HeaderChampDetailHolder(itemBinding)
     }
 
     class HeaderModelMapper() : Mapper<ChampDetailViewModel.DetailChampModel, HeaderModel>() {
@@ -77,6 +89,10 @@ class HeaderChampDetailViewBinder :
             }
             return listItemUrl
         }
+    }
+
+    interface ItemCLick {
+        fun onLick(name: String)
     }
 
 }

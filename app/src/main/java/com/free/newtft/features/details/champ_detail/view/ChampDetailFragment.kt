@@ -14,6 +14,7 @@ import com.free.newtft.features.details.DetailActivity
 import com.free.newtft.features.details.champ_detail.viewbinder.HeaderChampDetailViewBinder
 import com.free.newtft.features.details.champ_detail.viewbinder.TraitsDetailViewBinder
 import com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel
+import com.free.newtft.features.dialog_item.view.DialogItemDetailFragment
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class ChampDetailFragment : BaseFragment() {
@@ -55,7 +56,13 @@ class ChampDetailFragment : BaseFragment() {
     }
 
     private fun setUpRecyclerview() {
-        val headerChampDetailViewBinder = HeaderChampDetailViewBinder()
+        val headerChampDetailViewBinder = HeaderChampDetailViewBinder(object :
+            HeaderChampDetailViewBinder.ItemCLick {
+            override fun onLick(name: String) {
+                val dialog = DialogItemDetailFragment.newInstant(name)
+                dialog.show(childFragmentManager,"DialogItemDetailFragment")
+            }
+        })
         detailAdapter.register(headerChampDetailViewBinder)
 
         val traitsDetailViewBinder = TraitsDetailViewBinder(this)
