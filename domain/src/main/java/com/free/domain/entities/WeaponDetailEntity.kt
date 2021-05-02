@@ -8,4 +8,7 @@ data class WeaponDetailEntity(
     val shadowPenalty: String,
     val isShadow: Boolean,
     val imgUrl: String
-)
+) {
+    fun isHaveShadowBonus() = (shadowBonus != "")
+    fun isHaveShadowPenalty() = (shadowPenalty != "")
+}

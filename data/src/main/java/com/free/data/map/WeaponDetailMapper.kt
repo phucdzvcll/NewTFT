@@ -17,7 +17,18 @@ class WeaponDetailMapper : Mapper<WeaponDetailResponse?, WeaponDetailEntity>() {
             shadowBonus = input?.shadowBonus.defaultEmpty(),
             shadowPenalty = input?.shadowPenalty.defaultEmpty(),
             isShadow = input?.isShadow.defaultFalse(),
-            imgUrl = "https://rerollcdn.com/items/$name.png"
+            imgUrl = imgUrlMapper(input?.isShadow.defaultFalse(), name)
         )
+    }
+
+    private fun imgUrlMapper(idShadow: Boolean, name: String): String {
+        return when (idShadow) {
+            true -> {
+                "https://rerollcdn.com/items/Shadow/$name.png"
+            }
+            else -> {
+                "https://rerollcdn.com/items/$name.png"
+            }
+        }
     }
 }

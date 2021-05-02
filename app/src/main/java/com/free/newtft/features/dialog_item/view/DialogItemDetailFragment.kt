@@ -13,7 +13,7 @@ import org.koin.android.viewmodel.ext.android.viewModel
 class DialogItemDetailFragment : DialogFragment() {
 
     lateinit var binding: DialogDetailWeaponBinding
-    val weaponDetailViewModel: WeaponDetailViewModel by viewModel()
+    private val weaponDetailViewModel: WeaponDetailViewModel by viewModel()
     private var nameWeapon = ""
 
     override fun onCreateView(
@@ -29,8 +29,15 @@ class DialogItemDetailFragment : DialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        dialog?.window?.setBackgroundDrawableResource(R.drawable.layout_bg_dialog)
         initData()
+        initView()
+    }
+
+    private fun initView() {
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.layout_bg_dialog)
+        binding.dismissDialog.setOnClickListener {
+            dialog?.dismiss()
+        }
     }
 
     private fun initData() {

@@ -46,6 +46,7 @@ val createRemoteModule = module {
     factory { ChampDialogMapper() }
     factory { WeaponMapper() }
     factory { WeaponDetailMapper() }
+    factory { RecipeMapper() }
 
     single<ChampsRepository> {
         ChampsRepositoryImpl(
@@ -87,6 +88,7 @@ val createRemoteModule = module {
         WeaponDetailRepositoryImpl(
             remoteExceptionInterceptor = get(),
             weaponApiService = get(),
+            recipeMapper = get(),
             weaponDetailMapper = get()
         )
     }

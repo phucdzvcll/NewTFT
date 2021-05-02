@@ -8,6 +8,7 @@ val createWeaponDetailModule = module {
     viewModel {
         WeaponDetailViewModel(
             appDispatchers = get(),
+            getListRecipeUseCase = get(),
             getWeaponDetailUseCase = get()
         )
     }

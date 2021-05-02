@@ -14,20 +14,18 @@
 
     <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}">
+        android:layout_height="match_parent">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="350dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:gravity="center"
-            android:minHeight="@dimen/dp_260"
             tools:background="@drawable/layout_bg_dialog">
 
             <ImageView
                 android:id="@+id/weaponImage"
-                loadImage="@{viewModel.weaponDetailLiveData.imgUrl}"
+                loadImage="@{viewModel.weaponDetailLiveData.weaponDetailEntity.imgUrl}"
                 android:layout_width="@dimen/dp_60"
                 android:layout_height="@dimen/dp_60"
                 android:contentDescription="@string/no_image"
@@ -39,7 +37,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dp_10"
-                android:text="@{viewModel.weaponDetailLiveData.name}"
+                android:text="@{viewModel.weaponDetailLiveData.weaponDetailEntity.name}"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="@+id/weaponImage"
@@ -65,7 +63,7 @@
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginTop="@dimen/dp_8"
                 android:layout_marginEnd="@dimen/dp_4"
-                android:text="@{viewModel.weaponDetailLiveData.description}"
+                android:text="@{viewModel.weaponDetailLiveData.weaponDetailEntity.description}"
                 android:textColor="@color/white"
                 android:textStyle="bold"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -79,6 +77,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/dp_8"
                 android:background="@color/color_silver"
+                android:visibility="@{viewModel.weaponDetailLiveData.weaponDetailEntity.isHaveShadowBonus() ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/description" />
@@ -90,9 +89,10 @@
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginTop="@dimen/dp_8"
                 android:layout_marginEnd="@dimen/dp_4"
-                android:text="@{viewModel.weaponDetailLiveData.shadowBonus}"
+                android:text="@{viewModel.weaponDetailLiveData.weaponDetailEntity.shadowBonus}"
                 android:textColor="@color/white"
                 android:textStyle="bold"
+                android:visibility="@{viewModel.weaponDetailLiveData.weaponDetailEntity.isHaveShadowBonus() ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider2"
@@ -104,6 +104,7 @@
                 android:layout_height="1dp"
                 android:layout_marginTop="@dimen/dp_8"
                 android:background="@color/color_silver"
+                android:visibility="@{viewModel.weaponDetailLiveData.weaponDetailEntity.isHaveShadowPenalty() ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/shadowBonus" />
@@ -115,9 +116,10 @@
                 android:layout_marginStart="@dimen/dp_4"
                 android:layout_marginTop="@dimen/dp_8"
                 android:layout_marginEnd="@dimen/dp_4"
-                android:text="@{viewModel.weaponDetailLiveData.shadowPenalty}"
+                android:text="@{viewModel.weaponDetailLiveData.weaponDetailEntity.shadowPenalty}"
                 android:textColor="@color/white"
                 android:textStyle="bold"
+                android:visibility="@{viewModel.weaponDetailLiveData.weaponDetailEntity.isHaveShadowPenalty() ? View.VISIBLE : View.GONE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/divider3"
@@ -149,18 +151,31 @@
                     android:text="@string/recipe"
                     android:textColor="@color/color_white" />
 
+                <ProgressBar
+                    android:layout_width="@dimen/dp_40"
+                    android:layout_height="@dimen/dp_40"
+                    android:layout_marginStart="@dimen/dp_40"
+                    android:gravity="center"
+                    android:visibility="@{viewModel.isLoading ? View.VISIBLE: View.GONE}" />
+
                 <ImageView
+                    loadImage="@{viewModel.weaponDetailLiveData.listRecipes[0].imgUrl}"
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginStart="@dimen/dp_24"
+                    android:background="@drawable/border_gold"
                     android:contentDescription="@string/no_image"
+                    android:visibility="@{viewModel.isLoading ? View.GONE: View.VISIBLE}"
                     tools:src="@tools:sample/avatars" />
 
                 <ImageView
+                    loadImage="@{viewModel.weaponDetailLiveData.listRecipes[1].imgUrl}"
                     android:layout_width="@dimen/dp_40"
                     android:layout_height="@dimen/dp_40"
                     android:layout_marginStart="@dimen/dp_4"
+                    android:background="@drawable/border_gold"
                     android:contentDescription="@string/no_image"
+                    android:visibility="@{viewModel.isLoading ? View.GONE: View.VISIBLE}"
                     tools:src="@tools:sample/avatars" />
             </LinearLayout>
 
@@ -170,18 +185,9 @@
                 android:layout_height="@dimen/dp_24"
                 android:contentDescription="@string/no_image"
                 android:src="@drawable/ic_close"
-                android:visibility="@{viewModel.isLoading ? View.GONE : View.VISIBLE}"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <ProgressBar
-            android:id="@+id/isLoading"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:indeterminate="true"
-            android:visibility="@{viewModel.isLoading ? View.VISIBLE : View.GONE}" />
     </FrameLayout>
 </layout>
