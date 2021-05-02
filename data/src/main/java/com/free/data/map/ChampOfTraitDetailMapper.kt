@@ -1,5 +1,6 @@
 package com.free.data.map
 
+import com.free.common_jvm.extension.createImgUrl
 import com.free.common_jvm.extension.defaultEmpty
 import com.free.common_jvm.extension.defaultZero
 import com.free.common_jvm.mapper.Mapper
@@ -11,7 +12,8 @@ class ChampOfTraitDetailMapper : Mapper<ChampionResponse?, TraitDetailEntity.Cha
         return TraitDetailEntity.Champion(
             name = input?.name.defaultEmpty(),
             cost = input?.cost.defaultZero(),
-            id = input?.id.defaultEmpty()
+            id = input?.id.defaultEmpty(),
+            imgUrl = input?.name.createImgUrl()
         )
     }
 }

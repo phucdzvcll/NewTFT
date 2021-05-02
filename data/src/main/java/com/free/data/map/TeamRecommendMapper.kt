@@ -5,6 +5,7 @@ import com.free.common_jvm.extension.defaultFalse
 import com.free.common_jvm.extension.defaultZero
 import com.free.common_jvm.mapper.Mapper
 import com.free.data.entities.TeamsResponse
+import com.free.domain.entities.ChampDialogEntity
 import com.free.domain.entities.TeamsRecommendEntity
 
 class TeamRecommendMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
@@ -14,7 +15,7 @@ class TeamRecommendMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
             rank = input?.rank.defaultEmpty(),
             listChamps = champListMapper(input?.champions.defaultEmpty()).distinct(),
             listTraits = listOf(
-                TeamsRecommendEntity.Trait(name = "", style = "", amountTraits = 0)
+                TeamsRecommendEntity.Trait(name = "", style = "", amountTraits = 0, "")
             )
         )
 
@@ -31,11 +32,25 @@ class TeamRecommendMapper() : Mapper<TeamsResponse?, TeamsRecommendEntity>() {
                     cost = champion.cost.defaultZero(),
                     traits = champion.traits.defaultEmpty(),
                     isThreeStars = champion.isThreeStars.defaultFalse(),
-                    items = champion.items.defaultEmpty()
+                    items = mapItems(champion.items.defaultEmpty())
                 )
             )
         }
         champ.sortBy { it.cost }
         return champ
+    }
+
+    private fun mapItems(list: List<String>): MutableList<TeamsRecommendEntity.Champ.Item> {
+        val items = mutableListOf<TeamsRecommendEntity.Champ.Item>()
+        list.forEach {
+            val name = it.replace(" ", "").replace("'", "")
+            items.add(
+                TeamsRecommendEntity.Champ.Item(
+                    name = it,
+                    imgUrl = "https://rerollcdn.com/items/$name.png"
+                )
+            )
+        }
+        return items
     }
 }

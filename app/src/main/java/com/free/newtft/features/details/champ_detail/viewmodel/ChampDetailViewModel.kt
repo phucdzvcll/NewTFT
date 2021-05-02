@@ -5,12 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.free.common_android.AppDispatchers
 import com.free.common_android.BaseViewModel
+import com.free.domain.entities.ChampDetailEntity
 import com.free.domain.entities.TraitDetailEntity
 import com.free.domain.usecases.show_champ.GetChampDetailUseCase
 import com.free.domain.usecases.show_champ.GetTraitsDetailUseCase
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.util.*
 
 class ChampDetailViewModel(
     private val appDispatchers: AppDispatchers,
@@ -38,7 +40,9 @@ class ChampDetailViewModel(
                         id = it.id,
                         name = it.name,
                         items = it.items,
-                        cost = it.cost
+                        cost = it.cost,
+                        coverImgUrl = it.coverImgUrl,
+                        imgUrl = it.imgUrl
                     )
                 )
                 getTraitsDetail(it.traits)
@@ -74,14 +78,18 @@ class ChampDetailViewModel(
         name = "",
         items = listOf(),
         cost = 0,
-        traits = listOf()
+        traits = listOf(),
+        imgUrl = "",
+        coverImgUrl = ""
     )
 
     data class DetailChampModel(
         val id: String,
         val cost: Int,
         val name: String,
-        val items: List<String>,
+        val items: List<ChampDetailEntity.Item>,
+        val imgUrl: String,
+        val coverImgUrl: String,
         val traits: List<TraitDetailEntity>
     )
 

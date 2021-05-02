@@ -55,7 +55,7 @@ class AdapterTraitsTeamRecommend :
                 listResult.add(
                     Trait(
                         amount = it.amount.toString(),
-                        imgUrl = "https://rerollcdn.com/icons/" + it.name.toLowerCase(Locale.ROOT) + ".png",
+                        imgUrl = it.imgUrl,
                         name = it.name,
                         style = it.style
                     )

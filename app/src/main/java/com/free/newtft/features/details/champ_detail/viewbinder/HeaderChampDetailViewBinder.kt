@@ -4,13 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.ItemViewBinder
-import com.free.common_jvm.extension.createImgUrl
 import com.free.common_jvm.mapper.Mapper
 import com.free.domain.entities.ChampDetailEntity
 import com.free.newtft.R
 import com.free.newtft.databinding.ItemHeaderDetailChampBinding
 import com.free.newtft.features.details.champ_detail.viewmodel.ChampDetailViewModel
-import java.util.*
 
 class HeaderChampDetailViewBinder :
     ItemViewBinder<HeaderChampDetailViewBinder.HeaderModel, HeaderChampDetailViewBinder.HeaderChampDetailHolder>() {
@@ -32,8 +30,13 @@ class HeaderChampDetailViewBinder :
         val coverImgUrl: String,
         val imgUrl: String,
         val cost: Int,
-        val items: List<String>
-    )
+        val items: List<Item>
+    ) {
+        data class Item(
+            val name: String,
+            val imgUrl: String
+        )
+    }
 
     override fun onBindViewHolder(holder: HeaderChampDetailHolder, item: HeaderModel) {
         holder.bind(headerModel = item)
@@ -55,17 +58,22 @@ class HeaderChampDetailViewBinder :
     class HeaderModelMapper() : Mapper<ChampDetailViewModel.DetailChampModel, HeaderModel>() {
         override fun map(input: ChampDetailViewModel.DetailChampModel): HeaderModel {
             return HeaderModel(
-                coverImgUrl = "https://ddragon.leagueoflegends.com/cdn/img/champion/splash/${input.name}_0.jpg",
-                imgUrl = input.name.createImgUrl(),
+                coverImgUrl = input.coverImgUrl,
+                imgUrl = input.imgUrl,
                 cost = input.cost,
                 items = mapItem(input.items)
             )
         }
 
-        private fun mapItem(list: List<String>): List<String> {
-            val listItemUrl = mutableListOf<String>()
+        private fun mapItem(list: List<ChampDetailEntity.Item>): List<HeaderModel.Item> {
+            val listItemUrl = mutableListOf<HeaderModel.Item>()
             list.forEach {
-                listItemUrl.add("https://rerollcdn.com/items/$it.png")
+                listItemUrl.add(
+                    HeaderModel.Item(
+                        name = it.name,
+                        imgUrl = it.imgUrl
+                    )
+                )
             }
             return listItemUrl
         }

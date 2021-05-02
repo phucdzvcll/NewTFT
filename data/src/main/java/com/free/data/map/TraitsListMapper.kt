@@ -4,6 +4,7 @@ import com.free.common_jvm.extension.defaultEmpty
 import com.free.common_jvm.extension.defaultZero
 import com.free.data.entities.TraitOfTeamRecommendResponse
 import com.free.domain.entities.TeamsRecommendEntity
+import java.util.*
 
 class TraitsListMapper {
 
@@ -23,7 +24,8 @@ class TraitsListMapper {
                         ""
                     },
                     amountTraits = grouping[it.name].defaultZero(),
-                    style = style
+                    style = style,
+                    imgUrl = "https://rerollcdn.com/icons/" + it.name?.toLowerCase(Locale.ROOT) + ".png"
                 )
             )
         }

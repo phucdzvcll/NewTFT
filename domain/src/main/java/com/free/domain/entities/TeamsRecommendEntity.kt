@@ -12,12 +12,18 @@ data class TeamsRecommendEntity(
         val id: String,
         val cost: Int,
         val traits: List<String>,
-        val items: List<String>
-    )
+        val items: List<Item>
+    ){
+        data class Item(
+            val name: String,
+            val imgUrl: String
+        )
+    }
 
     data class Trait(
         val name: String,
         val style: String,
-        val amountTraits: Int
+        val amountTraits: Int,
+        val imgUrl: String
     )
 }

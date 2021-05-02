@@ -61,7 +61,7 @@ class AdapterShowChamps : RecyclerView.Adapter<AdapterShowChamps.ShowChampViewHo
                         id = champ.id,
                         cost = champ.cost,
                         name = champ.name,
-                        imgUrl = champ.name.createImgUrl()
+                        imgUrl = champ.imgUrl
                     ),
                     itemClickLiveData = championLiveData
                 )

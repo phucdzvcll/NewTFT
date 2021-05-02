@@ -5,6 +5,7 @@ import com.free.common_jvm.extension.defaultZero
 import com.free.common_jvm.mapper.Mapper
 import com.free.data.entities.TraitDetailResponse
 import com.free.domain.entities.TraitDetailEntity
+import java.util.*
 
 class TraitsDetailMapper : Mapper<TraitDetailResponse?, TraitDetailEntity>() {
     override fun map(input: TraitDetailResponse?): TraitDetailEntity {
@@ -13,7 +14,8 @@ class TraitsDetailMapper : Mapper<TraitDetailResponse?, TraitDetailEntity>() {
             listSets = mapSet(input?.sets.defaultEmpty()),
             innate = input?.innate.defaultEmpty(),
             listChamps = listOf(),
-            description = input?.description.defaultEmpty()
+            description = input?.description.defaultEmpty(),
+            imgUrl = "https://rerollcdn.com/icons/" + input?.name.defaultEmpty().toLowerCase(Locale.ROOT) + ".png"
         )
     }
 

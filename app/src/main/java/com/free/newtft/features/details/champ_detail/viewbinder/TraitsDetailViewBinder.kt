@@ -8,13 +8,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.drakeet.multitype.ItemViewBinder
-import com.free.common_jvm.extension.createImgUrl
 import com.free.common_jvm.mapper.Mapper
 import com.free.domain.entities.TraitDetailEntity
 import com.free.newtft.R
 import com.free.newtft.databinding.ItemChampOfTraitDetailBinding
 import com.free.newtft.databinding.ItemTraitDetailChampBinding
-import java.util.*
 
 class TraitsDetailViewBinder(val lifecycle: LifecycleOwner) :
     ItemViewBinder<TraitsDetailViewBinder.TraitDetailModel, TraitsDetailViewBinder.TraitsDetailViewHolder>() {
@@ -61,7 +59,7 @@ class TraitsDetailViewBinder(val lifecycle: LifecycleOwner) :
                 name = input.name,
                 innate = input.innate,
                 description = input.description,
-                imgUrl = "https://rerollcdn.com/icons/" + input.name.toLowerCase(Locale.ROOT) + ".png",
+                imgUrl = input.imgUrl,
                 listSets = mapSets(input.listSets),
                 listChamps = mapChampions(input.listChamps)
             )
@@ -75,7 +73,7 @@ class TraitsDetailViewBinder(val lifecycle: LifecycleOwner) :
                         id = it.id,
                         name = it.name,
                         cost = it.cost,
-                        imgUrl = it.name.createImgUrl()
+                        imgUrl = it.imgUrl
                     )
                 )
             }

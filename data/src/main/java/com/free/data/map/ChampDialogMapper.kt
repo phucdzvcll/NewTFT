@@ -21,11 +21,15 @@ class ChampDialogMapper : Mapper<ChampDialogResponse?, ChampDialogEntity>() {
         )
     }
 
-    private fun mapItems(list: List<String>): MutableList<String> {
-        val items = mutableListOf<String>()
+    private fun mapItems(list: List<String>): MutableList<ChampDialogEntity.Item> {
+        val items = mutableListOf<ChampDialogEntity.Item>()
         list.forEach {
+            val name = it.replace(" ", "").replace("'", "")
             items.add(
-                "https://rerollcdn.com/items/$it.png"
+                ChampDialogEntity.Item(
+                    name = it,
+                    imgUrl = "https://rerollcdn.com/items/$name.png"
+                )
             )
         }
         return items

@@ -23,6 +23,7 @@ class ChampDetailRepositoryImpl(
         Either.runSuspendWithCatchError(listOf(remoteExceptionInterceptor)) {
             val detailChampRepository = champDetailApiService.getDetailChamp(id)
             val champDetailEntity = champDetailMapper.map(detailChampRepository)
+            champDetailEntity
             return@runSuspendWithCatchError Either.Success(champDetailEntity)
         }
 

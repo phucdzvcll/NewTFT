@@ -5,11 +5,15 @@ data class ChampDialogEntity(
     val cost: Int,
     val id: String,
     val traits: List<Trait>,
-    val items: List<String>,
+    val items: List<Item>,
     val imgUrl: String,
     val coverUrl: String
 ) {
     data class Trait(
+        val name: String,
+        val imgUrl: String
+    )
+    data class Item(
         val name: String,
         val imgUrl: String
     )

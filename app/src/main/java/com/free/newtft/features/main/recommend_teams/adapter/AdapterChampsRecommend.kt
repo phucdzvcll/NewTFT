@@ -69,13 +69,14 @@ class AdapterChampsRecommend :
         return list
     }
 
-    private fun maItems(items: List<String>): List<Champion.Item> {
+    private fun maItems(items: List<AdapterTeamRecommend.TeamsRecommend.Champions.Item>): List<Champion.Item> {
         val listItems = mutableListOf<Champion.Item>()
         items.forEach {
             listItems.add(
                 Champion.Item(
-                    imgUrl = "https://rerollcdn.com/items/$it.png",
-                    isVisible = (it != "")
+                    imgUrl = it.imgUrl,
+                    name = it.name,
+                    isVisible = (it.name != "")
 
                 )
             )
@@ -93,6 +94,7 @@ class AdapterChampsRecommend :
     ) {
         data class Item(
             val imgUrl: String,
+            val name: String,
             val isVisible: Boolean
         )
     }

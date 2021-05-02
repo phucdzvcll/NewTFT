@@ -41,7 +41,7 @@
 
         <ImageView
             android:id="@+id/item1"
-            loadImage="@{header.items[0]}"
+            loadImage="@{header.items[0].imgUrl}"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
             android:background="@drawable/border_item"
@@ -54,7 +54,7 @@
 
         <ImageView
             android:id="@+id/item2"
-            loadImage="@{header.items[1]}"
+            loadImage="@{header.items[1].imgUrl}"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
             android:background="@drawable/border_item"
@@ -67,7 +67,7 @@
 
         <ImageView
             android:id="@+id/item3"
-            loadImage="@{header.items[2]}"
+            loadImage="@{header.items[2].imgUrl}"
             android:layout_width="@dimen/dp_40"
             android:layout_height="@dimen/dp_40"
             android:background="@drawable/border_item"

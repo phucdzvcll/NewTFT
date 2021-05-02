@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.free.common_jvm.extension.createImgUrl
+import com.free.domain.entities.ChampDialogEntity
 import com.free.domain.entities.TeamsRecommendEntity
 import com.free.newtft.databinding.ItemTeamRecommendBinding
 
@@ -88,11 +89,24 @@ class AdapterTeamRecommend(val owner: LifecycleOwner) :
                     imgUrl = it.name.createImgUrl(),
                     cost = it.cost,
                     isThreeStars = it.isThreeStars,
-                    items = it.items
+                    items = mapItems(it.items)
                 )
             )
         }
         return listResult
+    }
+
+    private fun mapItems(list: List<TeamsRecommendEntity.Champ.Item>): MutableList<TeamsRecommend.Champions.Item> {
+        val items = mutableListOf<TeamsRecommend.Champions.Item>()
+        list.forEach {
+            items.add(
+                TeamsRecommend.Champions.Item(
+                    name = it.name,
+                    imgUrl = it.imgUrl
+                )
+            )
+        }
+        return items
     }
 
     private fun mapTrait(champsEntity: List<TeamsRecommendEntity.Trait>): List<TeamsRecommend.Trait> {
@@ -101,7 +115,7 @@ class AdapterTeamRecommend(val owner: LifecycleOwner) :
             listResult.add(
                 TeamsRecommend.Trait(
                     name = it.name,
-                    imgUrl = it.name.createImgUrl(),
+                    imgUrl = it.imgUrl,
                     amount = it.amountTraits,
                     style = it.style
                 )
@@ -161,8 +175,13 @@ class AdapterTeamRecommend(val owner: LifecycleOwner) :
             val name: String,
             val imgUrl: String,
             val cost: Int,
-            val items: List<String>
-        )
+            val items: List<Item>
+        ) {
+            data class Item(
+                val name: String,
+                val imgUrl: String
+            )
+        }
 
         data class Trait(
             val style: String,

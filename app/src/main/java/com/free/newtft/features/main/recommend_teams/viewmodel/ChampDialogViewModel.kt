@@ -25,7 +25,7 @@ class ChampDialogViewModel(
             name = "",
             cost = 0,
             id = "",
-            items = listOf("", "", ""),
+            items = listOf(),
             traits = listOf(
                 ChampDialogEntity.Trait("", ""),
                 ChampDialogEntity.Trait("", ""),
