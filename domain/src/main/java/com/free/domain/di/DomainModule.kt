@@ -3,6 +3,7 @@ package com.free.domain.di
 import com.free.domain.usecases.show_champ.*
 import com.free.domain.usecases.champ_detail.GetChampDetailUseCase
 import com.free.domain.usecases.champ_detail.GetTraitsDetailUseCase
+import com.free.domain.usecases.team_builder.GetListChampsBuilderUseCase
 import com.free.domain.usecases.team_recommend.GetChampDialogUseCase
 import com.free.domain.usecases.team_recommend.GetListTeamsRecommendUseCase
 import com.free.domain.usecases.weapon.GetListWeaponUseCase
@@ -26,4 +27,6 @@ val createDomainModule = module {
     factory { GetWeaponDetailUseCase(weaponDetailRepository = get()) }
 
     factory { GetListRecipeUseCase(weaponDetailRepository = get()) }
+
+    factory { GetListChampsBuilderUseCase(teamBuilderRepository = get()) }
 }

@@ -3,7 +3,7 @@ package com.free.newtft.view
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
-import com.free.newtft.features.main.build_team.BuildFragment
+import com.free.newtft.features.main.build_team.view.BuildFragment
 import com.free.newtft.features.main.weapon.view.WeaponFragment
 import com.free.newtft.features.main.recommend_teams.view.RecommendFragment
 import com.free.newtft.features.main.show_champ.view.ShowFragment

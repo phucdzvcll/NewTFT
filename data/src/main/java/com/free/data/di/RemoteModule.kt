@@ -36,6 +36,7 @@ val createRemoteModule = module {
     factory { get<Retrofit>().create(ChampDetailApiService::class.java) }
     factory { get<Retrofit>().create(ChampDialogApiService::class.java) }
     factory { get<Retrofit>().create(WeaponApiService::class.java) }
+    factory { get<Retrofit>().create(TeamBuilderApiService::class.java) }
 
     factory { ChampsListMapper() }
     factory { TeamRecommendMapper() }
@@ -47,6 +48,7 @@ val createRemoteModule = module {
     factory { WeaponMapper() }
     factory { WeaponDetailMapper() }
     factory { RecipeMapper() }
+    factory { ChampBuilderMapper() }
 
     single<ChampsRepository> {
         ChampsRepositoryImpl(
@@ -98,6 +100,14 @@ val createRemoteModule = module {
             remoteExceptionInterceptor = get(),
             weaponApiService = get(),
             weaponMapper = get()
+        )
+    }
+
+    single<TeamBuilderRepository> {
+        TeamBuilderRepositoryImpl(
+            remoteExceptionInterceptor = get(),
+            champBuilderMapper = get(),
+            teamBuilderApiService = get()
         )
     }
 }

@@ -6,6 +6,7 @@ import com.free.data.di.createRemoteModule
 import com.free.domain.di.createDomainModule
 import com.free.newtft.features.details.champ_detail.di.champDetailModule
 import com.free.newtft.features.dialog_item.di.createWeaponDetailModule
+import com.free.newtft.features.main.build_team.di.createTeamBuilderModule
 import com.free.newtft.features.main.recommend_teams.di.teamsRecommendModule
 import com.free.newtft.features.main.show_champ.di.showChampModule
 import com.free.newtft.features.main.weapon.di.createWeaponModule
@@ -25,6 +26,7 @@ class MyApplication : Application() {
                 teamsRecommendModule,
                 champDetailModule,
                 createWeaponModule,
+                createTeamBuilderModule,
                 createWeaponDetailModule
             )
         }

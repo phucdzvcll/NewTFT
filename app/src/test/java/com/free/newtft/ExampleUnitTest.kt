@@ -12,5 +12,9 @@ import kotlin.Comparator
 class ExampleUnitTest {
     @Test
     fun addition_isCorrect() {
+        val list = mutableListOf(1,2,3,4)
+        list.removeAt(2)
+        //list.add(0,2)
+        println(list)
     }
 }

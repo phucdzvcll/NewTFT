@@ -24,6 +24,7 @@
     <color name="color_black">#000000</color>
     <color name="colorAccent">#f40009</color>
     <color name="backgroundColor">#3A506B</color>
+    <color name="titleBackgroundColor">#80000000</color>
     <color name="backgroundTabLayout">#0B132B</color>
     <color name="backgroundCardView">#1C2541</color>
 </resources>
