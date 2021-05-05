@@ -5,7 +5,7 @@ import com.free.domain.entities.ChampsEntity
 import com.free.domain.repositories.ChampsRepository
 import com.free.domain.usecases.base.UseCase
 import com.free.domain.usecases.base.UseCaseParams
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class GetListChampsUseCase(private val champsRepository: ChampsRepository) :
     UseCase<UseCaseParams.Empty, List<ChampsEntity>>() {

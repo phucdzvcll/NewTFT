@@ -5,7 +5,7 @@ import com.free.domain.entities.RecipeEntity
 import com.free.domain.repositories.WeaponDetailRepository
 import com.free.domain.usecases.base.UseCase
 import com.free.domain.usecases.base.UseCaseParams
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class GetListRecipeUseCase(private val weaponDetailRepository: WeaponDetailRepository) :
     UseCase<GetListRecipeUseCase.GetListRecipeUseCaseParam, List<RecipeEntity>>() {

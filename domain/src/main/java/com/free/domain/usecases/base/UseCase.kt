@@ -1,7 +1,7 @@
 package com.free.domain.usecases.base
 
 import com.free.common_jvm.exception.Failure
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 abstract class  UseCase<Params : UseCaseParams, Result>() {
 

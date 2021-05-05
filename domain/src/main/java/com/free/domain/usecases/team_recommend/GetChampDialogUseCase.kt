@@ -6,7 +6,7 @@ import com.free.domain.repositories.ChampDialogRepository
 import com.free.domain.usecases.base.UseCase
 import com.free.domain.usecases.base.UseCaseParams
 import com.free.domain.usecases.champ_detail.GetChampDetailUseCase
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class GetChampDialogUseCase(private val champDialogRepository: ChampDialogRepository) :
     UseCase<GetChampDetailUseCase.GetChampDetailUseCaseParam, ChampDialogEntity>() {

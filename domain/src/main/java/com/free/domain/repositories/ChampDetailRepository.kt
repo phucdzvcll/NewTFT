@@ -3,7 +3,7 @@ package com.free.domain.repositories
 import com.free.common_jvm.exception.Failure
 import com.free.domain.entities.ChampDetailEntity
 import com.free.domain.entities.TraitDetailEntity
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 interface ChampDetailRepository {
 

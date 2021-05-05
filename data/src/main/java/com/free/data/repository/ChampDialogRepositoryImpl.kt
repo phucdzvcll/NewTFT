@@ -6,7 +6,7 @@ import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.ChampDialogMapper
 import com.free.domain.entities.ChampDialogEntity
 import com.free.domain.repositories.ChampDialogRepository
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class ChampDialogRepositoryImpl(
     private val remoteExceptionInterceptor: RemoteExceptionInterceptor,

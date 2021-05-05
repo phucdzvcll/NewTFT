@@ -6,7 +6,7 @@ import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.ChampBuilderMapper
 import com.free.domain.entities.ChampOfTeamBuilderEntity
 import com.free.domain.repositories.TeamBuilderRepository
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class TeamBuilderRepositoryImpl(
     private val remoteExceptionInterceptor: RemoteExceptionInterceptor,

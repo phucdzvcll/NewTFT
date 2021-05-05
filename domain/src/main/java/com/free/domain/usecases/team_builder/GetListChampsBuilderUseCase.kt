@@ -5,7 +5,7 @@ import com.free.domain.entities.ChampOfTeamBuilderEntity
 import com.free.domain.repositories.TeamBuilderRepository
 import com.free.domain.usecases.base.UseCase
 import com.free.domain.usecases.base.UseCaseParams
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class GetListChampsBuilderUseCase(private val teamBuilderRepository: TeamBuilderRepository) :
     UseCase<UseCaseParams.Empty, List<ChampOfTeamBuilderEntity>>() {

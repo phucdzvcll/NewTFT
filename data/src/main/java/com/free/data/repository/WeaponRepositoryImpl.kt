@@ -6,7 +6,7 @@ import com.free.data.exception_interceptor.RemoteExceptionInterceptor
 import com.free.data.map.WeaponMapper
 import com.free.domain.entities.WeaponEntity
 import com.free.domain.repositories.WeaponRepository
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class WeaponRepositoryImpl(
     private val remoteExceptionInterceptor: RemoteExceptionInterceptor,

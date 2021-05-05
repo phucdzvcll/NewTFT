@@ -9,7 +9,7 @@ import com.free.common_jvm.exception.Failure
 import com.free.domain.entities.ChampsEntity
 import com.free.domain.usecases.base.UseCaseParams
 import com.free.domain.usecases.show_champ.GetListChampsUseCase
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext

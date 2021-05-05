@@ -5,7 +5,7 @@ import com.free.domain.entities.ChampDetailEntity
 import com.free.domain.repositories.ChampDetailRepository
 import com.free.domain.usecases.base.UseCase
 import com.free.domain.usecases.base.UseCaseParams
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class GetChampDetailUseCase(private val champDetailRepository: ChampDetailRepository) :
     UseCase<GetChampDetailUseCase.GetChampDetailUseCaseParam, ChampDetailEntity>() {

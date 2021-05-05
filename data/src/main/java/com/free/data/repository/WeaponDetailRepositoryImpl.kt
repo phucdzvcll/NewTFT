@@ -9,7 +9,7 @@ import com.free.data.map.WeaponDetailMapper
 import com.free.domain.entities.RecipeEntity
 import com.free.domain.entities.WeaponDetailEntity
 import com.free.domain.repositories.WeaponDetailRepository
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class WeaponDetailRepositoryImpl(
     private val remoteExceptionInterceptor: RemoteExceptionInterceptor,

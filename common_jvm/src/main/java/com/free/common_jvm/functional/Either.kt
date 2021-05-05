@@ -1,4 +1,4 @@
-package com.toast.comico.vn.common_jvm.functional
+package com.free.common_jvm.functional
 
 import com.free.common_jvm.exception.ExceptionInterceptor
 import com.free.common_jvm.exception.Failure
@@ -20,11 +20,11 @@ sealed class Either<out Fail, out SuccessResult> {
     /** * Represents the right side of [Either] class which by convention is a "Success". */
     data class Success<out R>(val b: R) : Either<Nothing, R>()
 
-    val isSuccess get() = this is Success<SuccessResult>
-    val isFailure get() = this is Either.Fail<Fail>
+//    val isSuccess get() = this is Success<SuccessResult>
+//    val isFailure get() = this is Either.Fail<Fail>
 
-    fun <Fail> fail(a: Fail) = Either.Fail(a)
-    fun <SuccessResult> success(b: SuccessResult) = Either.Success(b)
+//    fun <Fail> fail(a: Fail) = Either.Fail(a)
+//    fun <SuccessResult> success(b: SuccessResult) = Either.Success(b)
 
     fun either(failAction: (Fail) -> Unit, successAction: (SuccessResult) -> Unit) {
         when (this) {
@@ -54,16 +54,16 @@ sealed class Either<out Fail, out SuccessResult> {
     }
 }
 
-// Credits to Alex Hart -> https://proandroiddev.com/kotlins-nothing-type-946de7d464fb
-// Composes 2 functions
-fun <A, B, C> ((A) -> B).compose(f: (B) -> C): (A) -> C = {
-    f(this(it))
-}
-
-fun <T, L, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T> =
-    when (this) {
-        is Either.Fail -> Either.Fail(a)
-        is Either.Success -> fn(b)
-    }
-
-fun <T, L, R> Either<L, R>.map(fn: (R) -> (T)): Either<L, T> = this.flatMap(fn.compose(::success))
+//// Credits to Alex Hart -> https://proandroiddev.com/kotlins-nothing-type-946de7d464fb
+//// Composes 2 functions
+//fun <A, B, C> ((A) -> B).compose(f: (B) -> C): (A) -> C = {
+//    f(this(it))
+//}
+//
+//fun <T, L, R> Either<L, R>.flatMap(fn: (R) -> Either<L, T>): Either<L, T> =
+//    when (this) {
+//        is Either.Fail -> Either.Fail(a)
+//        is Either.Success -> fn(b)
+//    }
+//
+//fun <T, L, R> Either<L, R>.map(fn: (R) -> (T)): Either<L, T> = this.flatMap(fn.compose(::success))

@@ -5,7 +5,7 @@ import com.free.domain.entities.TraitDetailEntity
 import com.free.domain.repositories.ChampDetailRepository
 import com.free.domain.usecases.base.UseCase
 import com.free.domain.usecases.base.UseCaseParams
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class GetTraitsDetailUseCase(private val champDetailRepository: ChampDetailRepository) :
     UseCase<GetTraitsDetailUseCase.GetTraitsDetailUseCaseParams, List<TraitDetailEntity>>() {

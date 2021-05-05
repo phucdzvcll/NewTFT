@@ -2,11 +2,10 @@ package com.free.domain.usecases.weapon_detail
 
 import com.free.common_jvm.exception.Failure
 import com.free.domain.entities.WeaponDetailEntity
-import com.free.domain.entities.WeaponEntity
 import com.free.domain.repositories.WeaponDetailRepository
 import com.free.domain.usecases.base.UseCase
 import com.free.domain.usecases.base.UseCaseParams
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class GetWeaponDetailUseCase(private val weaponDetailRepository: WeaponDetailRepository) :
     UseCase<GetWeaponDetailUseCase.WeaponDetailUseCaseParam, WeaponDetailEntity>() {

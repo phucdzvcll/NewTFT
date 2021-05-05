@@ -10,7 +10,7 @@ import com.free.data.map.TraitsListMapper
 import com.free.data.map.TeamRecommendMapper
 import com.free.domain.entities.TeamsRecommendEntity
 import com.free.domain.repositories.TeamsRecommendRepository
-import com.toast.comico.vn.common_jvm.functional.Either
+import com.free.common_jvm.functional.Either
 
 class TeamsRecommendResponseImpl(
     private val remoteExceptionInterceptor: RemoteExceptionInterceptor,
